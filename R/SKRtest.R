@@ -2,7 +2,19 @@ SKRtest <- function(y, trt, n, dferror, mserror, alpha, dms.range)
 {
     Ybar <- tapply(y, trt, mean)
     Ybar <- sort(Ybar)
-  posmax <- as.integer(which.max(Ybar[2:n] - Ybar[1:(n - 1)]))
+    gap <- Ybar[2:n] - Ybar[1:(n - 1)]
+    gap <- Ybar[2:n] - Ybar[1:(n - 1)]
+    if(length(max(gap)==gap) > 1){
+      valmax <- which(gap == max(gap))
+      auxpos <- min(c(n - valmax[1], valmax[1]))
+      for(i in valmax[-1]){
+        auxpos <- cbind(auxpos,min(c(n - i, i)))
+      }
+      auxpos <- which.max(auxpos)
+      posmax <- valmax[auxpos]
+    } else{
+      posmax <- as.integer(which.max(Ybar[2:n] - Ybar[1:(n - 1)]))
+    }
     qobs <- Ybar[n] - Ybar[1]
   groups <- rep(0, times = n)
       ng <- 1
@@ -25,8 +37,20 @@ SKRtest <- function(y, trt, n, dferror, mserror, alpha, dms.range)
       ini  <- groups[posI]
       posF <- max(which(groups == ini))
       if (((posF - posI) > 0) & (ini > 0)) {
-        posmax <- as.integer(which.max(Ybar[(posI + 1):posF]
-                                       - Ybar[posI:(posF - 1)]))
+        gap <- Ybar[(posI + 1):posF] - Ybar[posI:(posF - 1)]
+        gap <- Ybar[(posI + 1):posF] - Ybar[posI:(posF - 1)]
+        if(length(max(gap)==gap) > 1){
+          valmax <- which(gap == max(gap))
+          auxpos <- min(c(posF - valmax[1], valmax[1]))
+          for(i in valmax[-1]){
+            auxpos <- cbind(auxpos,min(c(posF - i, i)))
+          }
+          auxpos <- which.max(auxpos)
+          posmax <- valmax[auxpos]
+        } else{
+          posmax <- as.integer(which.max(Ybar[(posI + 1):posF]
+                                         - Ybar[posI:(posF - 1)]))
+        }
         qobs <- Ybar[posF] - Ybar[posI]
         aux <- groups[posI]
         if  (qobs <= dms.range) {

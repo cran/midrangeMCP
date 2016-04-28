@@ -2,7 +2,18 @@ SNKMtest <- function(y, trt, n, dferror, mserror, alpha, dms.snkm)
 {
   Ybar   <- tapply(y, trt, mean)
   Ybar   <- sort(Ybar)
-  posmax <- as.integer(which.max(Ybar[2:n]-Ybar[1:(n-1)]))
+  gap <- Ybar[2:n] - Ybar[1:(n - 1)]
+  if(length(max(gap)==gap) > 1){
+    valmax <- which(gap == max(gap))
+    auxpos <- min(c(n - valmax[1], valmax[1]))
+    for(i in valmax[-1]){
+      auxpos <- cbind(auxpos,min(c(n - i, i)))
+    }
+    auxpos <- which.max(auxpos)
+    posmax <- valmax[auxpos]
+  } else{
+    posmax <- as.integer(which.max(Ybar[2:n] - Ybar[1:(n - 1)]))
+  }
   if (posmax >= (n - posmax))
   {
     Ymean <- mean(Ybar[1:posmax])
@@ -40,8 +51,19 @@ SNKMtest <- function(y, trt, n, dferror, mserror, alpha, dms.snkm)
     if (continua2==TRUE) {
       repeat {
         pos    <- pos + 1
+        gap <- Ybar[(pos + 1):(pos + range - 1)] - Ybar[pos:(pos + range - 2)]
+        if(length(max(gap)==gap) > 1){
+          valmax <- which(gap == max(gap))
+          auxpos <- min(c(range - valmax[1], valmax[1]))
+          for(i in valmax[-1]){
+            auxpos <- cbind(auxpos,min(c(n - i, i)))
+          }
+          auxpos <- which.max(auxpos)
+          posmax <- valmax[auxpos]
+        }else{
         posmax <- as.integer(which.max(Ybar[(pos + 1):(pos + range - 1)]
-                                       - Ybar[pos:(pos + range - 2)]))
+                                         - Ybar[pos:(pos + range - 2)]))
+        }
         if (posmax >= (pos + range - 1 - posmax)) {
           Ymean <- mean(Ybar[pos:(pos+posmax-1)])
         } else {

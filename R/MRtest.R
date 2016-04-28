@@ -125,6 +125,12 @@ MRtest <- function(y, trt = NULL, dferror = NULL, mserror = NULL, replication = 
     if (is.null(replication)) {
       stop("The replication argument must be informed", call. = FALSE)
     }
+    if (!is.numeric(y)) {
+      stop("The y argument must be numeric", call. = FALSE)
+    }
+    if (!is.factor(trt)) {
+      stop("The trt argument must be factor", call. = FALSE)
+    }
   }
   if (is.numeric(y)) {
     if (!is.numeric(y)) {
