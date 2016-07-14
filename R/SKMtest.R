@@ -2,8 +2,9 @@ SKMtest <- function(y, trt, n, dferror, mserror, alpha, dms) {
   Ybar <- tapply(y, trt, mean)
   Ybar <- sort(Ybar)
   gap <- Ybar[2:n] - Ybar[1:(n - 1)]
-  if(length(max(gap)==gap) > 1){
-    valmax <- which(gap == max(gap))
+  auxpos2 <- max(gap)==gap
+  if(length(auxpos2[auxpos2 == T]) > 1){                # Saber se existe mais de um
+    valmax <- which(gap == max(gap))            # gap max
     auxpos <- min(c(n - valmax[1], valmax[1]))
     for(i in valmax[-1]){
       auxpos <- cbind(auxpos,min(c(n - i, i)))
@@ -41,8 +42,9 @@ SKMtest <- function(y, trt, n, dferror, mserror, alpha, dms) {
       posF <- max(which(groups == ini))
       if (((posF-posI) > 0) & (ini > 0)) {
         gap <- Ybar[(posI + 1):posF] - Ybar[posI:(posF - 1)]
-        if(length(max(gap)==gap) > 1){
-          valmax <- which(gap == max(gap))
+        auxpos2 <- max(gap)==gap
+        if(length(auxpos2[auxpos2 == T]) > 1){                  # Saber se existe  
+          valmax <- which(gap == max(gap))              # mais de um gap max
           auxpos <- min(c(posF - valmax[1], valmax[1]))
           for(i in valmax[-1]){
             auxpos <- cbind(auxpos,min(c(posF - i, i)))

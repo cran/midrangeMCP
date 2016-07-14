@@ -2,7 +2,8 @@ TMtest <- function(y, trt, n, dferror, mserror, alpha, dms) {
   Ybar <- tapply(y, trt, mean)
   Ybar <- sort(Ybar)
   gap <- Ybar[2:n] - Ybar[1:(n - 1)]
-  if(length(max(gap)==gap) > 1){
+  auxpos2 <- max(gap)==gap
+  if(length(auxpos2[auxpos2 == T]) > 1){
     valmax <- which(gap == max(gap))
     auxpos <- min(c(n - valmax[1], valmax[1]))
     for(i in valmax[-1]){
@@ -50,7 +51,8 @@ TMtest <- function(y, trt, n, dferror, mserror, alpha, dms) {
         posmax <- as.integer(which.max(Ybar[(pos + 1):(pos + range - 1)]
                                        - Ybar[pos:(pos + range - 2)]))
         gap <- Ybar[(pos + 1):(pos + range - 1)] - Ybar[pos:(pos + range - 2)]
-        if(length(max(gap)==gap) > 1){
+        auxpos2 <- max(gap)==gap
+        if(length(auxpos2[auxpos2 == T]) > 1){
           valmax <- which(gap == max(gap))
           auxpos <- min(c(range - valmax[1], valmax[1]))
           for(i in valmax[-1]){

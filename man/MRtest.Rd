@@ -22,7 +22,7 @@ the treatments.}
 
 \item{replication}{Number de repetitions of the treatments in the experiment.
 For unbalanced data should be informed the harmonic mean of repetitions.
-This argument should be informed only if \code{ismean = TRUE}.}
+This argument should also be informed if \code{ismean = TRUE}.}
 
 \item{alpha}{Significant level. The default is \code{alpha = 0.05}.}
 
