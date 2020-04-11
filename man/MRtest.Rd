@@ -5,9 +5,17 @@
 \title{Multiple comparison procedures to the means of a factor using
 the studentized range and midrange distributions.}
 \usage{
-MRtest(y, trt = NULL, dferror = NULL, mserror = NULL,
-  replication = NULL, alpha = 0.05, main = NULL, MCP = "all",
-  ismean = FALSE)
+MRtest(
+  y,
+  trt = NULL,
+  dferror = NULL,
+  mserror = NULL,
+  replication = NULL,
+  alpha = 0.05,
+  main = NULL,
+  MCP = "all",
+  ismean = FALSE
+)
 }
 \arguments{
 \item{y}{Model (aov or lm), numeric vector containing the
@@ -22,7 +30,7 @@ the treatments.}
 
 \item{replication}{Number de repetitions of the treatments in the experiment.
 For unbalanced data should be informed the harmonic mean of repetitions.
-This argument should also be informed if \code{ismean = TRUE}.}
+This argument should be informed only if \code{ismean = TRUE}.}
 
 \item{alpha}{Significant level. The default is \code{alpha = 0.05}.}
 
@@ -30,8 +38,8 @@ This argument should also be informed if \code{ismean = TRUE}.}
 
 \item{MCP}{Allows choosing the multiple comparison test;
 the \emph{defaut} is "all". This option will go perform all tests.
-However, the options are: the Skott-Knott midrange test ("SKM"),
-the Skott-Knott Range test ("SKR"), the Student-Newman-Keuls
+However, the options are: the Skott-Knott midrange test ("MGM"),
+the Skott-Knott Range test ("MGR"), the Student-Newman-Keuls
 midrange test ("SNKM") and the Tukey midrange test ("TM").}
 
 \item{ismean}{Logic. If \code{FALSE} (default), the \code{y} argument represents
@@ -55,7 +63,7 @@ mean of treatments.}
 \details{
 The \code{MCP} argument allows you to choose various tests
     of multiple comparisons at once. For example,
-    \code{MCP = c("SKM", "SKR")}, and so on.
+    \code{MCP = c("MGM", "MGR")}, and so on.
 }
 \examples{
 # Simulated data (completely randomized design)
@@ -82,8 +90,8 @@ results <- MRtest(y = rv,
                   dferror = DFerror,
                   mserror = MSerror,
                   alpha = 0.05,
-                  main = "Multiple Comparison Procedure: SKM test",
-                  MCP = c("SKM"))
+                  main = "Multiple Comparison Procedure: MGM test",
+                  MCP = c("MGM"))
 
 # Other option for the MCP argument is "all". All tests are used.
 
@@ -95,8 +103,8 @@ results$Summary    # Summary of the response variable
 res  <- aov(rv~treat)
 
 MRtest(y = res, trt = "treat", alpha = 0.05,
-       main = "Multiple Comparison Procedure: SKM test",
-       MCP = c("SKM"))
+       main = "Multiple Comparison Procedure: MGM test",
+       MCP = c("MGM"))
 
 # For unbalanced data: It will be used the harmonic mean of
 #                       the number of experiment replicates
@@ -107,10 +115,10 @@ treat <- treat[-1]
 
 res  <- lm(rv~treat) # Linear model
 
-# Multiple comparison procedure: SKR test
+# Multiple comparison procedure: MGR test
 MRtest(y = res, trt = "treat", alpha = 0.05,
-       main = "Multiple Comparison Procedure: SKR test",
-       MCP = c("SKR"))
+       main = "Multiple Comparison Procedure: MGR test",
+       MCP = c("MGR"))
 
 # Assuming that the available data are the averages
 #  of the treatments and the analysis of variance
@@ -134,9 +142,8 @@ MRtest(y = mean.treat,
        mserror = MSerror,
        replication = replic,
        alpha = 0.05,
-       main = "Multiple Comparison Procedure: SKM test",
-       MCP = c("SKM"),
+       main = "Multiple Comparison Procedure: MGM test",
+       MCP = c("MGM"),
        ismean = TRUE)
 
 }
-

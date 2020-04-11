@@ -15,7 +15,7 @@
 #'     the bars are drawn horizontally with the first at the bottom.
 #' @param ... Parameters of the \code{\link{barplot}} function
 #' @return \code{MRbarplot} return the bar plot of the tests chosen
-#'     ("SKM", "SKR", "SNKM" and "TM")
+#'     ("MGM", "MGR", "SNKM" and "TM")
 #'     to evaluate the treatment means.
 #' @details The \code{MCP} argument allows choosing several tests
 #'     of multiple comparisons from the
@@ -41,27 +41,28 @@
 #' # Choosing tests
 #' results <- MRtest(y = res, trt = "treat", alpha = 0.05,
 #'                    main = "Multiple Comparison Procedures",
-#'                    MCP = c("SKM", "TM"))
+#'                    MCP = c("MGM", "TM"))
 #'
 #' MRbarplot(results, MCP = "all") # It will be shown two
 #'                              # graphs. First, for the
-#'                              # results of \code{'SKM'}
+#'                              # results of \code{'MGM'}
 #'                              # and the second for the
 #'                              # results of \code{'TM'}.
 #'
-#' MRbarplot(results, MCP = "SKM") # It will be shown
+#' MRbarplot(results, MCP = "MGM") # It will be shown
 #'                                  # only the graph
 #'                                  # for the result of
-#'                                  # \code{'SKM'}
+#'                                  # \code{'MGM'}
 #'
 #' # Plot for papers
 #' MRbarplot(results, MCP = "all", col = gray.colors(10))
+#' @importFrom "grDevices" "graphics.off" "heat.colors"
 #' @export
 MRbarplot <- function (x,
                        MCP = "all",
-                       col = heat.colors(10),
+                       col = grDevices::heat.colors(10),
                        horiz = FALSE, ...) {
-  mcps  <- c("SKM", "SKR", "SNKM", "TM")
+  mcps  <- c("MGM", "MGR", "SNKM", "TM")
   tests <- sort(x$Tests)
   if (all(MCP == "all")) {
     MCP = tests
@@ -100,8 +101,8 @@ MRbarplot <- function (x,
     par(las=2) # make label text perpendicular to axis
   }
 
-  # Skott-Knott Midrange plot
-  if (any(MCP == "SKM")) {
+  # Means Grouping Midrange plot
+  if (any(MCP == "MGM")) {
     groups <- x$Groups[[1]][[2]]
     if (horiz) {
       ind    <- barplot (means, horiz = horiz, col = col,
@@ -163,8 +164,8 @@ MRbarplot <- function (x,
     }
   }
 
-  # Skott-Knott Range plot
-  if (any(MCP == "SKR")){
+  # Means Grouping Range plot
+  if (any(MCP == "MGR")){
     cont <- nmcps <= 1
     cont <- length(cont[cont == TRUE])
     groups <- x$Groups[[cont + 1]][[2]]

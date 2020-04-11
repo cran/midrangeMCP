@@ -64,7 +64,7 @@ group.test  <- function(Teste){
   return(data.frame(Means = w[, 1], Groups = M))
 }
 
-# Function for to show the results of the SKM and SKR tests
+# Function for to show the results of the MGM and MGR tests
 group.test2 <- function(Teste) {
   n <- nrow(Teste)
   ordertest <- Teste[order(Teste[, 1], decreasing = TRUE), ]

@@ -19,8 +19,8 @@
 #' @param main Title of the analysis.
 #' @param MCP Allows choosing the multiple comparison test;
 #'     the \emph{defaut} is "all". This option will go perform all tests.
-#'     However, the options are: the Skott-Knott midrange test ("SKM"),
-#'     the Skott-Knott Range test ("SKR"), the Student-Newman-Keuls
+#'     However, the options are: the Skott-Knott midrange test ("MGM"),
+#'     the Skott-Knott Range test ("MGR"), the Student-Newman-Keuls
 #'     midrange test ("SNKM") and the Tukey midrange test ("TM").
 #' @param ismean Logic. If \code{FALSE} (default), the \code{y} argument represents
 #' a model (aov or lm) or a numeric vector containing the response variable. If \code{TRUE} the \code{y} argument represents the
@@ -33,7 +33,7 @@
 #'     also stored in the object.
 #' @details The \code{MCP} argument allows you to choose various tests
 #'     of multiple comparisons at once. For example,
-#'     \code{MCP = c("SKM", "SKR")}, and so on.
+#'     \code{MCP = c("MGM", "MGR")}, and so on.
 #' @examples
 #' # Simulated data (completely randomized design)
 #'
@@ -59,8 +59,8 @@
 #'                   dferror = DFerror,
 #'                   mserror = MSerror,
 #'                   alpha = 0.05,
-#'                   main = "Multiple Comparison Procedure: SKM test",
-#'                   MCP = c("SKM"))
+#'                   main = "Multiple Comparison Procedure: MGM test",
+#'                   MCP = c("MGM"))
 #'
 #' # Other option for the MCP argument is "all". All tests are used.
 #'
@@ -72,8 +72,8 @@
 #' res  <- aov(rv~treat)
 #'
 #' MRtest(y = res, trt = "treat", alpha = 0.05,
-#'        main = "Multiple Comparison Procedure: SKM test",
-#'        MCP = c("SKM"))
+#'        main = "Multiple Comparison Procedure: MGM test",
+#'        MCP = c("MGM"))
 #'
 #' # For unbalanced data: It will be used the harmonic mean of
 #' #                       the number of experiment replicates
@@ -84,10 +84,10 @@
 #'
 #' res  <- lm(rv~treat) # Linear model
 #'
-#' # Multiple comparison procedure: SKR test
+#' # Multiple comparison procedure: MGR test
 #' MRtest(y = res, trt = "treat", alpha = 0.05,
-#'        main = "Multiple Comparison Procedure: SKR test",
-#'        MCP = c("SKR"))
+#'        main = "Multiple Comparison Procedure: MGR test",
+#'        MCP = c("MGR"))
 #'
 #' # Assuming that the available data are the averages
 #' #  of the treatments and the analysis of variance
@@ -111,11 +111,12 @@
 #'        mserror = MSerror,
 #'        replication = replic,
 #'        alpha = 0.05,
-#'        main = "Multiple Comparison Procedure: SKM test",
-#'        MCP = c("SKM"),
+#'        main = "Multiple Comparison Procedure: MGM test",
+#'        MCP = c("MGM"),
 #'        ismean = TRUE)
 #'
-#' @import "stats" "utils" "graphics" "SMR"
+#' @import "utils" "graphics" "SMR"
+#' @importFrom "stats" "deviance" "df.residual" "qtukey"
 #' @export
 MRtest <- function(y, trt = NULL, dferror = NULL, mserror = NULL, replication = NULL, alpha = 0.05, main = NULL,
                    MCP = "all", ismean = FALSE){
@@ -124,12 +125,6 @@ MRtest <- function(y, trt = NULL, dferror = NULL, mserror = NULL, replication = 
   if (ismean == TRUE) {
     if (is.null(replication)) {
       stop("The replication argument must be informed", call. = FALSE)
-    }
-    if (!is.numeric(y)) {
-      stop("The y argument must be numeric", call. = FALSE)
-    }
-    if (!is.factor(trt)) {
-      stop("The trt argument must be factor", call. = FALSE)
     }
   }
   if (is.numeric(y)) {
@@ -151,18 +146,18 @@ MRtest <- function(y, trt = NULL, dferror = NULL, mserror = NULL, replication = 
   }
   #####################################################
   if (all(MCP == "all")){
-    MCP = c("SKM", "SKR", "SNKM", "TM")
+    MCP = c("MGM", "MGR", "SNKM", "TM")
   }
   #####################################################
   #Defensive programming
   if(is.null(trt)){
     stop("The trt argument is required", call. = FALSE)
   }
-  mcps <- c("SKM", "SKR", "SNKM", "TM")
+  mcps <- c("MGM", "MGR", "SNKM", "TM")
   nas  <- pmatch(MCP, mcps)
   if (any(is.na(nas))) {
-    stop("The options for the MCP argument are 'SKM',
-         'SKR', 'SNKM' and 'TM'", call. = FALSE)
+    stop("The options for the MCP argument are 'MGM',
+         'MGR', 'SNKM' and 'TM'", call. = FALSE)
   }
   ################################################
   name.y   <- paste(deparse(substitute(y)))
@@ -271,39 +266,39 @@ MRtest <- function(y, trt = NULL, dferror = NULL, mserror = NULL, replication = 
     nnn      <- 2:n
     aaa      <- rep(1 - alpha / 2, times = (n - 1))
     MRq.snkm <- SMR::qSMR(aaa, nnn, dferror) # Studentized midrange of the SNKM test
-    MRq      <- MRq.snkm[n - 1] # Studentized midrange of the SKM/TM test
-    dms.int  <- MRq * sqrt(mserror / rh) # Internal DMS of the SKM/TM test
+    MRq      <- MRq.snkm[n - 1] # Studentized midrange of the MGM/TM test
+    dms.int  <- MRq * sqrt(mserror / rh) # Internal DMS of the MGM/TM test
     dms      <- dms.int + sqrt(0.5) * sqrt(mserror / rh) / n^0.5 # add of mean square error/nmed^0.5
-    dms      <- c(dms, dms.int) # External DMS of the SKM/TM test
+    dms      <- c(dms, dms.int) # External DMS of the MGM/TM test
     dmsint   <- MRq.snkm * sqrt(mserror / rh) # Internal DMS of the SNKM test
     dms.snkm <- dmsint + sqrt(0.5) * sqrt(mserror / rh) / n^0.5 # External DMS of the SNKM test
   } else{
-    MRq     <- SMR::qSMR(1 - alpha / 2, n, dferror) # Studentized midrange of the SKM/TM test
-    dms.int <- MRq * sqrt(mserror / rh) # Internal DMS of the SKM/TM test
-    dms     <- dms.int + sqrt(0.5) * sqrt(mserror/rh) / n^0.5 # External DMS of the SKM/TM test
-    dms     <- c(dms, dms.int) # DMS of the SKM/TM test
+    MRq     <- SMR::qSMR(1 - alpha / 2, n, dferror) # Studentized midrange of the MGM/TM test
+    dms.int <- MRq * sqrt(mserror / rh) # Internal DMS of the MGM/TM test
+    dms     <- dms.int + sqrt(0.5) * sqrt(mserror/rh) / n^0.5 # External DMS of the MGM/TM test
+    dms     <- c(dms, dms.int) # DMS of the MGM/TM test
   }
 
   #DMS range:
-  Rq   <- qtukey(1 - alpha, n, dferror) # Studentized range of the SKR test
-  dms.range <- Rq * sqrt(mserror / rh) # DMS of the SKR test
+  Rq   <- qtukey(1 - alpha, n, dferror) # Studentized range of the MGR test
+  dms.range <- Rq * sqrt(mserror / rh) # DMS of the MGR test
 
   #Initial statistics:
-  statistics.SKM  <- NA
-  statistics.SKR  <- NA
+  statistics.MGM  <- NA
+  statistics.MGR  <- NA
   statistics.SNKM <- NA
   statistics.TM   <- NA
 
   #Initial groups:
-  test.SKM  <- NA
-  test.SKR  <- NA
+  test.MGM  <- NA
+  test.MGR  <- NA
   test.SNKM <- NA
   test.TM   <- NA
 
 
   # Skott-Knott Midrange Test
-  if (any(MCP == "SKM")){
-    cat("\nSkott-Knott Midrange Test\n\n")
+  if (any(MCP == "MGM")){
+    cat("\nMean Grouping Midrange Test\n\n")
     statistics <- data.frame(Exp.Mean = Mean,
                              CV      = CV,
                              MSerror = mserror,
@@ -314,18 +309,18 @@ MRtest <- function(y, trt = NULL, dferror = NULL, mserror = NULL, replication = 
                              Int.DMS = dms[2])
     cat("Statistics: \n")
     rownames(statistics) <- " "
-    statistics.SKM <- statistics
+    statistics.MGM <- statistics
     print(statistics)
-    test <- SKMtest(y, trt, n, dferror, mserror, alpha, dms)
+    test <- MGMtest(y, trt, n, dferror, mserror, alpha, dms)
     test[1] <- round(test[1], 2)
-    test.SKM <- test
+    test.MGM <- test
     cat("\nGroups: \n")
     print(test)
   }
 
   # Skott-Knott Range Test
-  if (any(MCP == "SKR")){
-    cat("\nSkott-Knott Range Test\n\n")
+  if (any(MCP == "MGR")){
+    cat("\nMean Grouping Range Test\n\n")
     statistics <- data.frame(Exp.Mean = Mean,
                              CV      = CV,
                              MSerror = mserror,
@@ -335,11 +330,11 @@ MRtest <- function(y, trt = NULL, dferror = NULL, mserror = NULL, replication = 
                              DMS = dms.range)
     cat("Statistics: \n")
     rownames(statistics) <- " "
-    statistics.SKR   <- statistics
+    statistics.MGR   <- statistics
     print(statistics)
-    test <- SKRtest(y, trt, n, dferror, mserror, alpha, dms.range)
+    test <- MGRtest(y, trt, n, dferror, mserror, alpha, dms.range)
     test[1] <- round(test[1], 2)
-    test.SKR <- test
+    test.MGR <- test
     cat("\nGroups: \n")
     print(test)
   }
@@ -392,14 +387,14 @@ MRtest <- function(y, trt = NULL, dferror = NULL, mserror = NULL, replication = 
   }
 
   #All statistics
-  stat.tests <- list(Statistics.SKM  = statistics.SKM,
-                     Statistics.SKR  = statistics.SKR,
+  stat.tests <- list(Statistics.MGM  = statistics.MGM,
+                     Statistics.MGR  = statistics.MGR,
                      Statistics.SNKM = statistics.SNKM,
                      Statistics.TM   = statistics.TM)
 
   #All groups
-  group.tests <- list(group.SKM  = test.SKM,
-                      group.SKR  = test.SKR,
+  group.tests <- list(group.MGM  = test.MGM,
+                      group.MGR  = test.MGR,
                       group.SNKM = test.SNKM,
                       group.TM   = test.TM)
   ################

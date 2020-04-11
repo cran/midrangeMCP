@@ -38,28 +38,19 @@
 #' # Choosing any tests
 #' results <- MRtest(y = res, trt = "treat", alpha = 0.05,
 #'                    main = "Multiple Comparison Procedures",
-#'                    MCP = c("SKM", "TM"))
+#'                    MCP = c("MGM", "TM"))
 #'
 #' #Export file in latex (Output in Console)
 #' MRwrite(results, MCP = "all", extension = "latex", dataMR = "all")
 #'
-#' #Export file with extension txt (Output in Directory)
-#' MRwrite(results, MCP = "all", extension = "txt", dataMR = "all")
-#'
-#' #Export file with extension csv (Output in Directory)
-#' MRwrite(results, MCP = "all", extension = "csv", dataMR = "all")
-#'
-#' #Export file to Microsoft excel (Output in Directory)
-#' MRwrite(results, MCP = "all", extension = "xlsx", dataMR = "all")
-#'
 #' #Observation: The MRwrite function export
 #' #             only one extension at a time
-#' @importFrom "WriteXLS" "WriteXLS"
+#' @importFrom "writexl" "write_xlsx"
 #' @importFrom "xtable" "xtable"
 #' @export
 MRwrite <- function(x, MCP = "all", extension = "csv",
                     dataMR = "all"){
-  mcps  <- c("SKM", "SKR", "SNKM", "TM")
+  mcps  <- c("MGM", "MGR", "SNKM", "TM")
   tests <- sort(x$Tests) # Tests ordered
   nmcps <- sort(pmatch(tests, mcps)) # Number of tests chosen
 
@@ -125,8 +116,8 @@ MRwrite <- function(x, MCP = "all", extension = "csv",
 
   # Write the results for option dataMR = "groups"
   if (any(dataMR == "groups")) {
-    if(any(MCP == "SKM")) {
-      name <- "groupSKM"
+    if(any(MCP == "MGM")) {
+      name <- "groupMGM"
       name <- paste(name, extension, sep = ".")
       if(extension == "csv"){
         trt <- rownames(x[[2]][[1]])
@@ -141,19 +132,20 @@ MRwrite <- function(x, MCP = "all", extension = "csv",
       if (extension == "xlsx"){
         trt <- rownames(x[[2]][[1]])
         dat <- data.frame(trt, x[[2]][[1]])
-        WriteXLS::WriteXLS("dat", ExcelFileName = name, row.names = FALSE)
+        name <- paste(getwd(), name, sep = "/")
+        writexl::write_xlsx(dat, name)
       }
       if (extension == "latex"){
         trt  <- rownames(x[[2]][[1]])
         ntrt <- length(trt)
         dat  <- data.frame(trt, x[[2]][[1]])
         rownames(dat) <- 1:ntrt
-        cat("Table in latex of results of the SKM test\n\n")
+        cat("Table in latex of results of the MGM test\n\n")
         print(xtable::xtable(dat), include.rownames=FALSE)
       }
     }
-    if (any(MCP == "SKR")) {
-      name <- "groupSKR"
+    if (any(MCP == "MGR")) {
+      name <- "groupMGR"
       name <- paste(name, extension, sep = ".")
       cont <- nmcps <= 1
       cont <- length(cont[cont == TRUE])
@@ -170,14 +162,15 @@ MRwrite <- function(x, MCP = "all", extension = "csv",
       if (extension == "xlsx") {
         trt <- rownames(x[[2]][[cont + 1]])
         dat <- data.frame(trt, x[[2]][[cont + 1]])
-        WriteXLS::WriteXLS("dat", ExcelFileName = name, row.names = FALSE)
+        name <- paste(getwd(), name, sep = "/")
+        writexl::write_xlsx(dat, name)
       }
       if (extension == "latex") {
         trt  <- rownames(x[[2]][[cont + 1]])
         ntrt <- length(trt)
         dat  <- data.frame(trt, x[[2]][[cont + 1]])
         rownames(dat) <- 1:ntrt
-        cat("\n\nTable in latex of results of the SKR test\n\n")
+        cat("\n\nTable in latex of results of the MGR test\n\n")
         print(xtable::xtable(dat), include.rownames=FALSE)
       }
     }
@@ -199,14 +192,15 @@ MRwrite <- function(x, MCP = "all", extension = "csv",
       if (extension == "xlsx"){
         trt <- rownames(x[[2]][[cont + 1]])
         dat <- data.frame(trt, x[[2]][[cont + 1]])
-        WriteXLS::WriteXLS("dat", ExcelFileName = name, row.names = FALSE)
+        name <- paste(getwd(), name, sep = "/")
+        writexl::write_xlsx(dat, name)
       }
       if (extension == "latex"){
         trt  <- rownames(x[[2]][[cont + 1]])
         ntrt <- length(trt)
         dat  <- data.frame(trt, x[[2]][[cont + 1]])
         rownames(dat) <- 1:ntrt
-        cat("\n\nTable in latex of results of the SKM test\n\n")
+        cat("\n\nTable in latex of results of the MGM test\n\n")
         print(xtable::xtable(dat), include.rownames=FALSE)
       }
     }
@@ -228,7 +222,8 @@ MRwrite <- function(x, MCP = "all", extension = "csv",
       if (extension == "xlsx"){
         trt <- rownames(x[[2]][[cont + 1]])
         dat <- data.frame(trt, x[[2]][[cont + 1]])
-        WriteXLS::WriteXLS("dat", ExcelFileName = name, row.names = FALSE)
+        name <- paste(getwd(), name, sep = "/")
+        writexl::write_xlsx(dat, name)
       }
       if (extension == "latex"){
         trt  <- rownames(x[[2]][[cont + 1]])
@@ -257,7 +252,8 @@ MRwrite <- function(x, MCP = "all", extension = "csv",
     if (extension == "xlsx"){
       trt <- rownames(x[[1]])
       dat <- data.frame(trt, x[[1]])
-      WriteXLS::WriteXLS("dat", ExcelFileName = name, row.names = FALSE)
+      name <- paste(getwd(), name, sep = "/")
+      writexl::write_xlsx(dat, name)
     }
     if (extension == "latex"){
       trt  <- rownames(x[[1]])

@@ -55,21 +55,11 @@ library(midrangeMCP)
 # Choosing any tests
 results <- MRtest(y = res, trt = "treat", alpha = 0.05,
                    main = "Multiple Comparison Procedures",
-                   MCP = c("SKM", "TM"))
+                   MCP = c("MGM", "TM"))
 
 #Export file in latex (Output in Console)
 MRwrite(results, MCP = "all", extension = "latex", dataMR = "all")
 
-#Export file with extension txt (Output in Directory)
-MRwrite(results, MCP = "all", extension = "txt", dataMR = "all")
-
-#Export file with extension csv (Output in Directory)
-MRwrite(results, MCP = "all", extension = "csv", dataMR = "all")
-
-#Export file to Microsoft excel (Output in Directory)
-MRwrite(results, MCP = "all", extension = "xlsx", dataMR = "all")
-
 #Observation: The MRwrite function export
 #             only one extension at a time
 }
-

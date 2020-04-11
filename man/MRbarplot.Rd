@@ -4,7 +4,7 @@
 \alias{MRbarplot}
 \title{Plotting the result of the multiple comparison procedures}
 \usage{
-MRbarplot(x, MCP = "all", col = heat.colors(10), horiz = FALSE, ...)
+MRbarplot(x, MCP = "all", col = grDevices::heat.colors(10), horiz = FALSE, ...)
 }
 \arguments{
 \item{x}{An object of the \code{MRtest} function}
@@ -24,7 +24,7 @@ the bars are drawn horizontally with the first at the bottom.}
 }
 \value{
 \code{MRbarplot} return the bar plot of the tests chosen
-    ("SKM", "SKR", "SNKM" and "TM")
+    ("MGM", "MGR", "SNKM" and "TM")
     to evaluate the treatment means.
 }
 \description{
@@ -59,20 +59,19 @@ library(midrangeMCP)
 # Choosing tests
 results <- MRtest(y = res, trt = "treat", alpha = 0.05,
                    main = "Multiple Comparison Procedures",
-                   MCP = c("SKM", "TM"))
+                   MCP = c("MGM", "TM"))
 
 MRbarplot(results, MCP = "all") # It will be shown two
                              # graphs. First, for the
-                             # results of \\code{'SKM'}
+                             # results of \code{'MGM'}
                              # and the second for the
-                             # results of \\code{'TM'}.
+                             # results of \code{'TM'}.
 
-MRbarplot(results, MCP = "SKM") # It will be shown
+MRbarplot(results, MCP = "MGM") # It will be shown
                                  # only the graph
                                  # for the result of
-                                 # \\code{'SKM'}
+                                 # \code{'MGM'}
 
 # Plot for papers
 MRbarplot(results, MCP = "all", col = gray.colors(10))
 }
-
