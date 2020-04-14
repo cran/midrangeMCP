@@ -69,8 +69,7 @@ MRwrite <- function(x, MCP = "all", extension = "csv",
   # Defensive programming: the length of the extension argument
   #                        must be less or equal to 1
   if(length(extension) > 1){
-    stop("The length of the entension argument is greater
-         than 1. ", "\nOptions: ", " csv", " txt", " xlsx", " latex",
+    stop("The length of the extension argument is greater than 1. ", "\n Options: ", " csv", " txt", " xlsx", " latex",
          call. = FALSE)
   }
   #################################################

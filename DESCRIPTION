@@ -2,11 +2,12 @@ Package: midrangeMCP
 Type: Package
 Title: Multiples Comparisons Procedures Based on Studentized Midrange
         and Range Distributions
-Version: 2.0
-Date: 2020-04-03
+Version: 2.1
+Date: 2020-04-14
 Authors@R: c(
-    person("Ben", "Deivide", email = "ben.deivide@ufsj.edu.br", role = "cre"),
-    person("Daniel", "Furtado", email = "danielff@dex.ufla.br", role = "aut"))
+    person("Ben", "Deivide", email = "ben.deivide@ufsj.edu.br", role = c("aut", "cre")),
+    person("Daniel", "Furtado", email = "danielff@dex.ufla.br", role = "aut"),
+    person("Diego", "Arthur", email = "digo.arthur@hotmail.com", role = "ctb"))
 Description: Apply tests of multiple comparisons based
     on studentized midrange and range distributions. 
     The tests are: Tukey Midrange (TM test),
@@ -22,9 +23,10 @@ License: GPL (>= 2)
 LazyData: TRUE
 RoxygenNote: 7.0.1
 NeedsCompilation: no
-Packaged: 2020-04-11 13:55:30 UTC; MABENLA
-Author: Ben Deivide [cre],
-  Daniel Furtado [aut]
+Packaged: 2020-04-14 16:29:49 UTC; MABENLA
+Author: Ben Deivide [aut, cre],
+  Daniel Furtado [aut],
+  Diego Arthur [ctb]
 Maintainer: Ben Deivide <ben.deivide@ufsj.edu.br>
 Repository: CRAN
-Date/Publication: 2020-04-11 16:40:06 UTC
+Date/Publication: 2020-04-14 17:20:06 UTC

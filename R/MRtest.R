@@ -156,8 +156,7 @@ MRtest <- function(y, trt = NULL, dferror = NULL, mserror = NULL, replication = 
   mcps <- c("MGM", "MGR", "SNKM", "TM")
   nas  <- pmatch(MCP, mcps)
   if (any(is.na(nas))) {
-    stop("The options for the MCP argument are 'MGM',
-         'MGR', 'SNKM' and 'TM'", call. = FALSE)
+    stop("The options for the MCP argument are 'MGM', 'MGR', 'SNKM' and 'TM'", call. = FALSE)
   }
   ################################################
   name.y   <- paste(deparse(substitute(y)))
@@ -258,7 +257,7 @@ MRtest <- function(y, trt = NULL, dferror = NULL, mserror = NULL, replication = 
   }
 
   if (length(unique(rn)) != 1) {
-    cat("\nHarmonic mean of the number of experiment replicates ",
+    cat("\n Harmonic mean of the number of experiment replicates ",
         rh, "\n")
   }
   #DMS midrange
@@ -298,7 +297,7 @@ MRtest <- function(y, trt = NULL, dferror = NULL, mserror = NULL, replication = 
 
   # Skott-Knott Midrange Test
   if (any(MCP == "MGM")){
-    cat("\nMean Grouping Midrange Test\n\n")
+    cat("\n Mean Grouping Midrange Test\n\n")
     statistics <- data.frame(Exp.Mean = Mean,
                              CV      = CV,
                              MSerror = mserror,
@@ -364,7 +363,7 @@ MRtest <- function(y, trt = NULL, dferror = NULL, mserror = NULL, replication = 
   }
 
   # Tukey Midrange Test
-  if (any(MCP == "TM")){
+  if (any(MCP == "TM")) {
     cat("\nTukey Midrange Test\n\n")
     statistics <- data.frame(Exp.Mean = Mean,
                              CV      = CV,

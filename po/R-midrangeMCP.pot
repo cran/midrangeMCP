@@ -1,0 +1,270 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: midrangeMCP 2.1\n"
+"POT-Creation-Date: 2020-04-13 23:53\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <LL@li.org>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=CHARSET\n"
+"Content-Transfer-Encoding: 8bit\n"
+
+################################
+# Internal functions without GUI
+################################
+
+msgid "The choice of the tests in the MCP argument must be in accordance with the tests chosen in the x argument \n Options:"
+msgstr ""
+
+msgid "The replication argument must be informed"
+msgstr ""
+
+msgid "The y argument must be numeric"
+msgstr ""
+
+msgid "The trt argument must be factor"
+msgstr ""
+
+msgid "The y and trt arguments must have same length"
+msgstr ""
+
+msgid "The dferror argument must be informed"
+msgstr ""
+
+msgid "The mserror argument must be informed"
+msgstr ""
+
+msgid "The trt argument is required"
+msgstr ""
+
+msgid "The options for the MCP argument are 'MGM', 'MGR', 'SNKM' and 'TM'"
+msgstr ""
+
+msgid "The length of the trt argument is invalid"
+msgstr ""
+
+msgid "The options for the trt argument are\n Options:"
+msgstr ""
+
+msgid "Note: Observe which of the options have signified practice"
+msgstr ""
+
+msgid "Any of the options of trt argument is wrong \n Options:"
+msgstr ""
+
+msgid "The length of the extension argument is greater than 1."
+msgstr ""
+
+msgid "Options:"
+msgstr ""
+
+msgid "csv"
+msgstr ""
+
+msgid "txt"
+msgstr ""
+
+msgid "xlsx"
+msgstr ""
+
+msgid "latex"
+msgstr ""
+
+msgid "Any dataMR argument is invalid \n Options:"
+msgstr ""
+
+msgid "groups"
+msgstr ""
+
+msgid "summary"
+msgstr ""
+
+msgid "Any extension argument is invalid \n Options:"
+msgstr ""
+
+#####
+# GUI
+#####
+
+msgid "GUI to the midrangeMCP package"
+msgstr ""
+
+msgid "Enter the data file (.txt or .csv)"
+msgstr ""
+
+msgid "Select a file ..."
+msgstr ""
+
+msgid "Check that the data has been loaded correctly. To do this, use the 'Edit/View' button or the 'Output' frame."
+msgstr ""
+
+msgid "Comma as decimal points"
+msgstr ""
+
+msgid "Separator of variables:"
+msgstr ""
+
+msgid "Edit/View"
+msgstr ""
+
+msgid "Choosing the directory"
+msgstr ""
+
+msgid "To insert a data set, the possible extensions are '.txt' and '.csv'. To do this, use the 'browse' button. If you want to identify a directory, before clicking on the 'browse' button, click on the 'Choosing the directory' button. After entering the data set, if you want to edit or view, click on the 'Edit/View' button. If your data has a comma as a decimal point separator, before clicking on the 'browse' button, activate the 'Comma as decimal points' box. Finally, if the variable separator is different from a blank space, indicate it without quotes."
+msgstr ""
+
+msgid "Output:"
+msgstr ""
+
+msgid "Console:"
+msgstr ""
+
+msgid "Calculate"
+msgstr ""
+
+msgid "Input"
+msgstr ""
+
+msgid "Tests:"
+msgstr ""
+
+msgid "Choose the test for data analysis. The Mean Grouping test based on Midrange (MGM test) and Mean Grouping test based on Range (MGR test) are tests without ambiguity in their results. These tests are similar to the Scott-Knott test. The Tukey Midrange test (TM test) and SNK Midrange test (SNKM test) are tests similar to the Tukey and SNK tests, respectively. these tests are also based on midrange."
+msgstr ""
+
+msgid "Extension:"
+msgstr ""
+
+msgid "Choose the type of extension for the data output file. If 'latex', the code will be exported to the Console frame. The remaining options will be exported to the selected directory. The choice of the directory can be made in the 'Choosing the directory' button."
+msgstr ""
+
+msgid "Data Entry Options:"
+msgstr ""
+
+msgid "help"
+msgstr ""
+
+msgid "Choose the type of data entry. If 'Model', enter the experimental model. If 'Response Variable', enter the object name of the responses and treatments variables and if 'Averages', enter the vector of means and treatments. For more details, use the help button on each option."
+msgstr ""
+
+msgid "Significance level:"
+msgstr ""
+
+msgid "Enter the value of the significance level. This value is a number between 0 and 1."
+msgstr ""
+
+msgid "Model"
+msgstr ""
+
+msgid "Enter model:"
+msgstr ""
+
+msgid "Enter the experimental model of type Response Variable (RV) ~ Predictive Variables (PV). These variables are in the 'Output' frame, after entering the data set. For example, in a randomized block design, assuming the 'treat' object corresponding to the treatments, 'block' object corresponding to the blocks and 'resp' object corresponding to the variable response. So, you must enter the following expression: resp ~ trat + block."
+msgstr ""
+
+msgid "Treatment:"
+msgstr ""
+
+msgid "Enter label name..."
+msgstr ""
+
+msgid "Enter the name of the treatments in the experiment model inserted above, in Predictive Variables (PV). The name of the treatment are in the 'Output' frame, after entering the data set. Inserted all the arguments above, click on the 'Calculate' button."
+msgstr ""
+
+msgid "Response variable"
+msgstr ""
+
+msgid "Response:"
+msgstr ""
+
+msgid "Insert the name of the variable response of the experiment model. The name of the response variable are in the 'Output' frame, after inserting the data set."
+msgstr ""
+
+msgid "Enter the name of the treatment of the experiment model. The name of the response variable are in the 'Output' frame, after entering the data set."
+msgstr ""
+
+msgid "DFerror:"
+msgstr ""
+
+msgid "Enter numeric value..."
+msgstr ""
+
+msgid "Enter the numeric value of the degrees of freedom of the mean square error of the experiment model."
+msgstr ""
+
+msgid "MSerror:"
+msgstr ""
+
+msgid "Enter the value of the mean square error of the experiment model. The value is numeric. Inserted all the arguments above, click on the 'Calculate' button."
+msgstr ""
+
+msgid "Averages"
+msgstr ""
+
+msgid "Averages:"
+msgstr ""
+
+msgid "Enter the vector..."
+msgstr ""
+
+msgid "Enter the values of the averages. Each mean of the vector must be separated by a comma. For example, for the vector of the average of four treatments: 10, 20, 30, 40. You do not need to use the concatenate function, i.e., c()."
+msgstr ""
+
+msgid "Enter the treatment levels. For example, for a character vector of four treatments: A, B, C, D. You do not need to use the concatenate function, i.e., c(). Nor will you need to use quotes between treatment levels."
+msgstr ""
+
+msgid "Enter the numeric value..."
+msgstr ""
+
+msgid "Enter the value of the degrees of freedom of the mean square error of the experiment model. The value is numeric."
+msgstr ""
+
+msgid "Enter the value of the mean square error of the experiment model. The value is numeric."
+msgstr ""
+
+msgid "Replication:"
+msgstr ""
+
+msgid "Enter the value of number of replications of the treatments. The value is numeric and if the data is unbalanced use the harmonic mean of the replications. Inserted all the arguments above, click on the 'Calculate' button"
+msgstr ""
+
+msgid "Graphic Parameters"
+msgstr ""
+
+msgid "Plot"
+msgstr ""
+
+msgid "Color:"
+msgstr ""
+
+msgid "or gray.colors() or..."
+msgstr ""
+
+msgid "Enter the color name of the chart bars. Place quotation marks around the color names. For example, if you want the color red for the bars, use 'red'. For functions, quotation marks are not necessary, for example gray.colors() function."
+msgstr ""
+
+msgid "Horizontal:"
+msgstr ""
+
+msgid "FALSE or TRUE..."
+msgstr ""
+
+msgid "Choose horizontal or vertical bars (FALSE or TRUE)."
+msgstr ""
+
+msgid "Axes"
+msgstr ""
+
+msgid "Enter the axes. Separate them by semicolons. To add the names on the X and Y axes: xlab = 'Label X-axix'; ylab = 'Label Y-axis'."
+msgstr ""
+
+msgid "Update plot"
+msgstr ""
+
+msgid "Save as..."
+msgstr ""
+
+msgid "Really close"
+msgstr ""
+
+msgid "Use the MRtest function! For help, use ?MRtest."
+msgstr ""

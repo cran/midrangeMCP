@@ -33,7 +33,7 @@ guimidrangeMCP <- function(gui = TRUE) {
     ###################
     # Parent Window
     ###################
-    guimidrangeMCP <- gwindow("GUI to the midrangeMCP package", visible = FALSE, width = 965, height = 614)
+    guimidrangeMCP <- gwindow(gettext("GUI to the midrangeMCP package", domain = "R-midrangeMCP"), visible = FALSE, width = 965, height = 614)
     #MCP <- gwindow("midrangeMCP", visible = TRUE, expand = TRUE)
     # size(MCP) Current screen dimension
 
@@ -46,7 +46,7 @@ guimidrangeMCP <- function(gui = TRUE) {
     # Child groups
     ##############
     group1 <- gpanedgroup(container = group.all, horizontal = FALSE, expand = TRUE)
-    size(group1) <- c(330,600)
+    size(group1) <- c(350,600)
     group2 <- gpanedgroup(container = group.all, horizontal = FALSE, expand = TRUE)
 
     #######################
@@ -57,7 +57,7 @@ guimidrangeMCP <- function(gui = TRUE) {
     child2.group1 <- ggroup(container = group1, horizontal = FALSE, expand = TRUE)
 
     # Label
-    glabel("Search the data file (.txt or .csv)", container = child1.group1, anchor = c(-1, 0))
+    glabel(gettext("Enter the data file (.txt or .csv)", domain = "R-midrangeMCP"), container = child1.group1, anchor = c(-1, 0))
 
     # Auxiliar function
     f.txt <- NULL
@@ -81,7 +81,7 @@ guimidrangeMCP <- function(gui = TRUE) {
     }
 
     # Open data.frame and save
-    start_dir <- gfilebrowse(text = "Select a file ...",
+    start_dir <- gfilebrowse(text = gettext("Select a file ...", domain = "R-midrangeMCP"),
                              quote = FALSE, container = child1.group1,
                              type = c("open"),
                              filter = c("txt"="txt", "csv"="csv"),
@@ -97,7 +97,7 @@ guimidrangeMCP <- function(gui = TRUE) {
                                                            names(f.txt(svalue(start_dir))),
                                                            "===========================",
                                                            "R object created: 'dat'")
-                               gmessage("Check that the data has been loaded correctly. To do this, use the 'Edit/View' button or the 'Output' frame button.", icon = "info")
+                               gmessage(gettext("Check that the data has been loaded correctly. To do this, use the 'Edit/View' button or the 'Output' frame.", domain = "R-midrangeMCP"), icon = "info")
                              })
 
     # Group of buttons
@@ -105,7 +105,7 @@ guimidrangeMCP <- function(gui = TRUE) {
 
     # Group of checkbox
     group_cbox_1 <- gcheckbox(
-      text      = "Comma as decimal points",
+      text      = gettext("Comma as decimal points", domain = "R-midrangeMCP"),
       checked   = FALSE,
       container = group_cbox,
       expand = TRUE
@@ -115,7 +115,7 @@ guimidrangeMCP <- function(gui = TRUE) {
     # Separator
     gseparator(horizontal = FALSE, container = group_cbox, expand = TRUE)
 
-    glabel("Separator of variables:", container = group_cbox, expand = TRUE)
+    glabel(gettext("Separator of variables:", domain = "R-midrangeMCP"), container = group_cbox, expand = TRUE)
     group_cbox_2 <- gedit("", container = group_cbox, width = 5, expand = TRUE)
 
     # Group of buttons
@@ -123,7 +123,7 @@ guimidrangeMCP <- function(gui = TRUE) {
 
     # Button of Edit/View
     dat2 <- NULL # This variable is internal, not exported to the console
-    group_buttons_1 <- gbutton("Edit/View", container = group_buttons,
+    group_buttons_1 <- gbutton(gettext("Edit/View", domain = "R-midrangeMCP"), container = group_buttons,
                                handler = function(h, ...){
                                  dat <- NULL
                                  # while (any(search() == "f.txt(svalue(start_dir))")) {
@@ -140,7 +140,7 @@ guimidrangeMCP <- function(gui = TRUE) {
 
     # Button Console
     brow <- NULL
-    group_buttons_2 <- console_button <- gbutton("Choosing the directory", container = group_buttons,
+    group_buttons_2 <- console_button <- gbutton(gettext("Choosing the directory", domain = "R-midrangeMCP"), container = group_buttons,
                                                  handler = function(h, ...){
                                                    brow <<- gfile(container = group_buttons, type = "selectdir")
                                                    setwd(brow)
@@ -149,14 +149,14 @@ guimidrangeMCP <- function(gui = TRUE) {
     # Help button
     bhelp <- gbutton("help", container = group_buttons,
                      handler = function(h, ...) {
-                       gmessage("To insert a data set, the possible extensions are '.txt' and '.csv'. To do this, use the 'browse' button. If you want to identify a directory, before clicking on the 'browse' button, click on the 'Choosing the directory' button. After entering the data set, if you want to edit or view, click on the 'Edit/View' button. If your data has a comma as a decimal point separator, before clicking on the 'browse' button, activate the 'Comma as decimal points' box. Finally, if the variable separator is different from a blank space, indicate it without quotes.", icon = "info")
+                       gmessage(gettext("To insert a data set, the possible extensions are '.txt' and '.csv'. To do this, use the 'browse' button. If you want to identify a directory, before clicking on the 'browse' button, click on the 'Choosing the directory' button. After entering the data set, if you want to edit or view, click on the 'Edit/View' button. If your data has a comma as a decimal point separator, before clicking on the 'browse' button, activate the 'Comma as decimal points' box. Finally, if the variable separator is different from a blank space, indicate it without quotes in the 'Separator of variables' box.", domain = "R-midrangeMCP"), icon = "info")
                      } )
 
     # Output
     ########
 
     # Frame
-    frame.output <- gframe("Output:", container = child1.group1, horizontal = FALSE, expand = TRUE)
+    frame.output <- gframe(gettext("Output:", domain = "R-midrangeMCP"), container = child1.group1, horizontal = FALSE, expand = TRUE)
     size(frame.output) <- c(425,200)
     ##
     search_results <- gtext( "" ,container = frame.output, expand = TRUE)
@@ -166,7 +166,7 @@ guimidrangeMCP <- function(gui = TRUE) {
     #########
 
     # Frame
-    frame.console <- gframe("Console:", container = child2.group1, expand = TRUE)
+    frame.console <- gframe(gettext("Console:", domain = "R-midrangeMCP"), container = child2.group1, expand = TRUE)
     ##
     console <- gcommandline(container = frame.console,
                             expand = TRUE, width = 300)
@@ -176,7 +176,7 @@ guimidrangeMCP <- function(gui = TRUE) {
     # Button Calculate
     ##################
 
-    calculate_button <- gbutton("Calculate", container = child2.group1)
+    calculate_button <- gbutton(gettext("Calculate", domain = "R-midrangeMCP"), container = child2.group1)
     ##
 
 
@@ -200,16 +200,16 @@ guimidrangeMCP <- function(gui = TRUE) {
 
       }
       if (svalue(entry_radio) == "Response variable") {
-        objtreat <- dat[,svalue(grv1d)]
-        objrv <- dat[,svalue(grv2d)]
-        results <- results <<- midrangeMCP::MRtest(y = objtreat,
-                                                   trt = objrv,
+        objrv <- dat[,svalue(grv1d)]
+        objtreat <- dat[,svalue(grv2d)]
+        results <- results <<- midrangeMCP::MRtest(y = objrv,
+                                                   trt = objtreat,
                                                    dferror = eval(parse(text = svalue(grv3d))),
                                                    mserror = eval(parse(text = svalue(grv4d))),
                                                    alpha = eval(parse(text = svalue(sl_gedit))),
                                                    MCP = svalue(tests_box_group))
         plot_group <- midrangeMCP::MRbarplot(results,
-                                        col = heat.colors(length(levels(objrv))))
+                                        col = heat.colors(length(levels(objtreat))))
         if (svalue(entry.exp_radio) == "latex"){
           svalue(console) <- "results; midrangeMCP::MRwrite(results, extension = 'latex')"
         } else {
@@ -264,19 +264,19 @@ guimidrangeMCP <- function(gui = TRUE) {
     #######
 
     # Frame
-    frame.input <- gframe("Input", container = child1.group2, horizontal = FALSE, expand = TRUE)
+    frame.input <- gframe(gettext("Input", domain = "R-midrangeMCP"), container = child1.group2, horizontal = FALSE, expand = TRUE)
 
     # Group.input.top
     group.input.top <- ggroup(horizontal = TRUE, container = frame.input, expand = TRUE)
     ##
-    glabel("Tests:", container = group.input.top, anchor = c(-1, 0))
+    glabel(gettext("Tests:", domain = "R-midrangeMCP"), container = group.input.top, anchor = c(-1, 0))
     glabel( container = group.input.top, anchor = c(-1, 0))
     entry.exp <- c("MGM", "MGR", "SNKM", "TM")
     tests_box_group <- gcombobox(entry.exp, horizontal = TRUE,
                                  selected = , container = group.input.top, anchor = c(-1,0))
-    bgit <- gbutton("help", container = group.input.top,
+    bgit <- gbutton(gettext("help", domain = "R-midrangeMCP"), container = group.input.top,
                     handler = function(h, ...) {
-                      gmessage("Choose the test for data analysis. The Mean Grouping test based on Midrange (MGM test) and Mean Grouping test based on Range (MGR test) are tests without ambiguity in their results. These tests are similar to the Scott-Knott test. The Tukey Midrange test (TM test) and SNK Midrange test (SNKM test) are tests similar to the Tukey and SNK tests, respectively. these tests are also based on midrange.", icon = "info")
+                      gmessage(gettext("Choose the test for data analysis. The Mean Grouping test based on Midrange (MGM test) and Mean Grouping test based on Range (MGR test) are tests without ambiguity in their results. These tests are similar to the Scott-Knott test. The Tukey Midrange test (TM test) and SNK Midrange test (SNKM test) are tests similar to the Tukey and SNK tests, respectively. these tests are also based on midrange.", domain = "R-midrangeMCP"), icon = "info")
                     } )
     # Separator
     gseparator(horizontal = FALSE, container = group.input.top, expand = TRUE)
@@ -284,13 +284,13 @@ guimidrangeMCP <- function(gui = TRUE) {
     # Export
     ########
 
-    glabel("Extension: ", container = group.input.top, anchor = c(1, 0))
+    glabel(gettext("Extension: ", domain = "R-midrangeMCP"), container = group.input.top, anchor = c(1, 0))
     entry.exp <- c("latex", "txt", "xlsx", "csv")
     entry.exp_radio <- gcombobox(entry.exp, horizontal = TRUE,
                                  selected = 4, container = group.input.top)
     bexp <- gbutton("help", container = group.input.top,
                     handler = function(h, ...) {
-                      gmessage("Choose the type of extension for the data output file. If 'latex', the code will be exported to the Console frame. The remaining options will be exported to the selected directory. The choice of the directory can be made in the 'Choosing the directory' button.", icon = "info")
+                      gmessage(gettext("Choose the type of extension for the data output file. If 'latex', the code will be exported to the Console frame. The remaining options will be exported to the selected directory. The choice of the directory can be made in the 'Choosing the directory' button.", domain = "R-midrangeMCP"), icon = "info")
                     } )
 
     # Separator
@@ -300,7 +300,7 @@ guimidrangeMCP <- function(gui = TRUE) {
 
     # Data Entry Options
     ####################
-    glabel("Data Entry Options:", container = group.entry, anchor = c(-1, 0))
+    glabel(gettext("Data Entry Options:", domain = "R-midrangeMCP"), container = group.entry, anchor = c(-1, 0))
     ##
     entry <- c("Model", "Response variable", "Averages")
     ##
@@ -322,20 +322,20 @@ guimidrangeMCP <- function(gui = TRUE) {
                                  enabled(groupmeans) <- TRUE
                                }
                              })
-    bentry <- gbutton("help", container = group.entry,
+    bentry <- gbutton(gettext(gettext("help", domain = "R-midrangeMCP"), domain = "R-midrangeMCP"), container = group.entry,
                     handler = function(h, ...) {
-                      gmessage("Choose the type of data entry. If 'Model', enter the experimental model. If 'Response Variable', enter the object name of the responses and treatments variables and if 'Averages', enter the vector of means and treatments. For more details, use the help button on each option.", icon = "info")
+                      gmessage(gettext("Choose the type of data entry. If 'Model', enter the experimental model. If 'Response Variable', enter the object name of the responses and treatments variables and if 'Averages', enter the vector of means and treatments. For more details, use the help button on each option.", domain = "R-midrangeMCP"), icon = "info")
                     } )
 
     # Separator
     gseparator(horizontal = FALSE, container = group.entry, expand = TRUE)
 
     # Significance level
-    glabel("Significance level:", container = group.entry, anchor = c(1, 0))
+    glabel(gettext("Significance level:", domain = "R-midrangeMCP"), container = group.entry, anchor = c(1, 0))
     sl_gedit <- gedit("0.05", container = group.entry, width = 5)
-    bsl <- gbutton("help", container = group.entry,
+    bsl <- gbutton(gettext("help", domain = "R-midrangeMCP"), container = group.entry,
                       handler = function(h, ...) {
-                        gmessage("Enter the value of the significance level. This value is a number between 0 and 1.", icon = "info")
+                        gmessage(gettext("Enter the value of the significance level. This value is a number between 0 and 1.", domain = "R-midrangeMCP"), icon = "info")
                       } )
 
 
@@ -346,116 +346,116 @@ guimidrangeMCP <- function(gui = TRUE) {
     size(g2) <- c(100,300)
 
     # Option 'Model'
-    group.model <- gframe("Model", horizontal = FALSE, container = g1, expand = TRUE)
+    group.model <- gframe(gettext("Model", domain = "R-midrangeMCP"), horizontal = FALSE, container = g1, expand = TRUE)
     ##
     gm1 <- ggroup(container = group.model, expand = TRUE)
-    glabel("Enter model:", container = gm1, expand = TRUE)
+    glabel(gettext("Enter model:", domain = "R-midrangeMCP"), container = gm1, expand = TRUE)
     gm1d <- gedit("", container = gm1, initial.msg = "RV ~ PV", expand = TRUE)
-    bm1d <- gbutton("help", container = gm1, expand = TRUE,
+    bm1d <- gbutton(gettext("help", domain = "R-midrangeMCP"), container = gm1, expand = TRUE,
                     handler = function(h, ...) {
-                      gmessage("Enter the experimental model of type Response Variable (RV) ~ Predictive Variables (PV). These variables are in the 'Output' frame, after entering the data set. For example, in a randomized block design, assuming the 'treat' object corresponding to the treatments, 'block' object corresponding to the blocks and 'resp' object corresponding to the variable response. So, you must enter the following expression: resp ~ trat + block.", icon = "info")
+                      gmessage(gettext("Enter the experimental model of type Response Variable (RV) ~ Predictive Variables (PV). These variables are in the 'Output' frame, after entering the data set. For example, in a randomized block design, assuming the 'treat' object corresponding to the treatments, 'block' object corresponding to the blocks and 'resp' object corresponding to the variable response. So, you must enter the following expression: resp ~ trat + block.", domain = "R-midrangeMCP"), icon = "info")
                     } )
     ##
     gm2 <- ggroup(container = group.model, expand = TRUE)
-    glabel("Treatment:", container = gm2)
+    glabel(gettext("Treatment:", domain = "R-midrangeMCP"), container = gm2)
     treat <- gedit("", container = gm2,
-                   initial.msg = "Enter label name...", expand = TRUE)
-    bm2d <- gbutton("help", container = gm2, expand = TRUE,
+                   initial.msg = gettext("Enter label name...", domain = "R-midrangeMCP"), expand = TRUE)
+    bm2d <- gbutton(gettext("help", domain = "R-midrangeMCP"), container = gm2, expand = TRUE,
                     handler = function(h, ...) {
-                      gmessage("Enter the name of the treatments in the experiment model inserted above, in Predictive Variables (PV). The name of the treatment are in the 'Output' frame, after entering the data set. Inserted all the arguments above, click on the 'Calculate' button.", icon = "info")
+                      gmessage(gettext("Enter the name of the treatments in the experiment model inserted above, in Predictive Variables (PV). The name of the treatment are in the 'Output' frame, after entering the data set. Inserted all the arguments above, click on the 'Calculate' button.", domain = "R-midrangeMCP"), icon = "info")
                     } )
 
     # Option 'Response variable'
-    group.rv <- gframe("Response variable", horizontal = FALSE, container = g1, expand = TRUE)
+    group.rv <- gframe(gettext("Response variable", domain = "R-midrangeMCP"), horizontal = FALSE, container = g1, expand = TRUE)
     #delete(grv2, grv2d)
     ##
     grv1 <- ggroup(container = group.rv, horizontal = TRUE, expand = TRUE)
-    glabel("Response:", container = grv1)
-    grv1d <- gedit("", container = grv1, initial.msg = "Enter label name...", expand = TRUE)
-    bgrv1d <- gbutton("help", container = grv1, expand = TRUE,
+    glabel(gettext("Response:", domain = "R-midrangeMCP"), container = grv1)
+    grv1d <- gedit("", container = grv1, initial.msg = gettext("Enter label name...", domain = "R-midrangeMCP"), expand = TRUE)
+    bgrv1d <- gbutton(gettext("help", domain = "R-midrangeMCP"), container = grv1, expand = TRUE,
                     handler = function(h, ...) {
-                      gmessage("Insert the name of the variable response in the experiment model. The name of the response variable are in the 'Output' frame, after inserting the data set.", icon = "info")
+                      gmessage(gettext("Insert the name of the variable response of the experiment model. The name of the response variable are in the 'Output' frame, after inserting the data set.", domain = "R-midrangeMCP"), icon = "info")
                     } )
 
     ##
     grv2 <- ggroup(container = group.rv, horizontal = TRUE, expand = TRUE)
-    glabel("Treatment:", container = grv2)
+    glabel(gettext("Treatment:", domain = "R-midrangeMCP"), container = grv2)
     grv2d <- gedit("", container = grv2,
-                   initial.msg = "Enter label name...", expand = TRUE)
-    bgrv2d <- gbutton("help", container = grv2, expand = TRUE,
+                   initial.msg = gettext("Enter label name...", domain = "R-midrangeMCP"), expand = TRUE)
+    bgrv2d <- gbutton(gettext("help", domain = "R-midrangeMCP"), container = grv2, expand = TRUE,
                       handler = function(h, ...) {
-                        gmessage("Enter the name of the variable response of the experiment model. The name of the response variable are in the 'Output' frame, after entering the data set.", icon = "info")
+                        gmessage(gettext("Enter the name of the treatment of the experiment model. The name of the response variable are in the 'Output' frame, after entering the data set.", domain = "R-midrangeMCP"), icon = "info")
                       } )
 
     ##
     grv3 <- ggroup(container = group.rv, horizontal = TRUE, expand = TRUE)
-    glabel("DFerror:", container = grv3)
+    glabel(gettext("DFerror:", domain = "R-midrangeMCP"), container = grv3)
     grv3d <- gedit("", container = grv3,
-                   initial.msg = "Enter numeric value...", expand = TRUE)
-    bgrv3d <- gbutton("help", container = grv3, expand = TRUE,
+                   initial.msg = gettext("Enter numeric value...", domain = "R-midrangeMCP"), expand = TRUE)
+    bgrv3d <- gbutton(gettext("help", domain = "R-midrangeMCP"), container = grv3, expand = TRUE,
                       handler = function(h, ...) {
-                        gmessage("Enter the numeric value of the degrees of freedom of the mean square error of the experiment model. The value is numeric.", icon = "info")
+                        gmessage(gettext("Enter the numeric value of the degrees of freedom of the mean square error of the experiment model.", domain = "R-midrangeMCP"), icon = "info")
                       } )
 
     ##
     grv4 <- ggroup(container = group.rv, horizontal = TRUE, expand = TRUE)
-    glabel("MSerror:", container = grv4)
+    glabel(gettext("MSerror:", domain = "R-midrangeMCP"), container = grv4)
     grv4d <- gedit("", container = grv4,
-                   initial.msg = "Enter numeric value...", expand = TRUE)
-    bgrv3d <- gbutton("help", container = grv4, expand = TRUE,
+                   initial.msg = gettext("Enter numeric value...", domain = "R-midrangeMCP"), expand = TRUE)
+    bgrv3d <- gbutton(gettext("help", domain = "R-midrangeMCP"), container = grv4, expand = TRUE,
                       handler = function(h, ...) {
-                        gmessage("Enter the value of the mean square error of the experiment model. The value is numeric. Inserted all the arguments above, click on the 'Calculate' button", icon = "info")
+                        gmessage(gettext("Enter the value of the mean square error of the experiment model. The value is numeric. Inserted all the arguments above, click on the 'Calculate' button.", domain = "R-midrangeMCP"), icon = "info")
                       } )
 
 
     # Option 'Averages'
-    groupmeans <- gframe("Averages", horizontal = FALSE, container = g1, expand = TRUE)
+    groupmeans <- gframe(gettext("Averages", domain = "R-midrangeMCP"), horizontal = FALSE, container = g1, expand = TRUE)
     #delete(g1, group.means)
     gme1 <- ggroup(container = groupmeans, horizontal = TRUE, expand = TRUE)
-    glabel("Averages:", container = gme1)
+    glabel(gettext("Averages:", domain = "R-midrangeMCP"), container = gme1)
     gme1d <- gedit("", container = gme1,
-                   initial.msg = "Enter the vector...", expand = TRUE)
-    bgme1d <- gbutton("help", container = gme1, expand = TRUE,
+                   initial.msg = gettext("Enter the vector...", domain = "R-midrangeMCP"), expand = TRUE)
+    bgme1d <- gbutton(gettext("help", domain = "R-midrangeMCP"), container = gme1, expand = TRUE,
                       handler = function(h, ...) {
-                        gmessage("Enter the the values of the averages. Each mean of the vector must be separated by a comma. For example, for the vector of the average of four treatments: 10, 20, 30, 40. You do not need to use the concatenate function, i.e., c().", icon = "info")
+                        gmessage(gettext("Enter the values of the averages. Each mean of the vector must be separated by a comma. For example, for the vector of the average of four treatments: 10, 20, 30, 40. You do not need to use the concatenate function, i.e., c().", domain = "R-midrangeMCP"), icon = "info")
                       } )
 
     ##
     gme2 <- ggroup(container = groupmeans, horizontal = TRUE, expand = TRUE)
-    glabel("Treatment:", container = gme2)
+    glabel(gettext("Treatment:", domain = "R-midrangeMCP"), container = gme2)
     gme2d <- gedit("", container = gme2,
-                   initial.msg = "Enter the vector...", expand = TRUE)
-    bgme1d <- gbutton("help", container = gme2, expand = TRUE,
+                   initial.msg = gettext("Enter the vector...", domain = "R-midrangeMCP"), expand = TRUE)
+    bgme1d <- gbutton(gettext("help", domain = "R-midrangeMCP"), container = gme2, expand = TRUE,
                       handler = function(h, ...) {
-                        gmessage("Enter the treatment levels of the treatment. For example, for a character vector of four treatments: A, B, C, D. You do not need to use the concatenate function, i.e., c().", icon = "info")
+                        gmessage(gettext("Enter the treatment levels. For example, for a character vector of four treatments: A, B, C, D. You do not need to use the concatenate function, i.e., c(). Nor will you need to use quotes between treatment levels.", domain = "R-midrangeMCP"), icon = "info")
                       } )
 
     ##
     gme3 <- ggroup(container = groupmeans, horizontal = TRUE, expand = TRUE)
-    glabel("DFerror:", container = gme3)
+    glabel(gettext("DFerror:", domain = "R-midrangeMCP"), container = gme3)
     gme3d <- gedit("", container = gme3,
-                   initial.msg = "Enter the numeric value...", expand = TRUE)
-    bme3d <- gbutton("help", container = gme3, expand = TRUE,
+                   initial.msg = gettext("Enter the numeric value...", domain = "R-midrangeMCP"), expand = TRUE)
+    bme3d <- gbutton(gettext("help", domain = "R-midrangeMCP"), container = gme3, expand = TRUE,
                       handler = function(h, ...) {
-                        gmessage("Enter the value of the degrees of freedom of the mean square error of the experiment model. The value is numeric.", icon = "info")
+                        gmessage(gettext("Enter the value of the degrees of freedom of the mean square error of the experiment model. The value is numeric.", domain = "R-midrangeMCP"), icon = "info")
                       } )
     ##
     gme4 <- ggroup(container = groupmeans, horizontal = TRUE, expand = TRUE)
-    glabel("MSerror:", container = gme4)
+    glabel(gettext("MSerror:", domain = "R-midrangeMCP"), container = gme4)
     gme4d <- gedit("", container = gme4,
-                   initial.msg = "Enter the numeric value...", expand = TRUE)
-    bgme4d <- gbutton("help", container = gme4, expand = TRUE,
+                   initial.msg = gettext("Enter the numeric value...", domain = "R-midrangeMCP"), expand = TRUE)
+    bgme4d <- gbutton(gettext("help", domain = "R-midrangeMCP"), container = gme4, expand = TRUE,
                       handler = function(h, ...) {
-                        gmessage("Enter the value of the mean square error of the experiment model. The value is numeric.", icon = "info")
+                        gmessage(gettext("Enter the value of the mean square error of the experiment model. The value is numeric.", domain = "R-midrangeMCP"), icon = "info")
                       } )
     ##
     gme5 <- ggroup(container = groupmeans, horizontal = TRUE, expand = TRUE)
-    glabel("Replication:", container = gme5)
+    glabel(gettext("Replication:", domain = "R-midrangeMCP"), container = gme5)
     gme5d <- gedit("", container = gme5,
-                   initial.msg = "Enter the numeric value...", expand = TRUE)
-    bgme5d <- gbutton("help", container = gme5, expand = TRUE,
+                   initial.msg = gettext("Enter the numeric value...", domain = "R-midrangeMCP"), expand = TRUE)
+    bgme5d <- gbutton(gettext("help", domain = "R-midrangeMCP"), container = gme5, expand = TRUE,
                       handler = function(h, ...) {
-                        gmessage("Enter the value of number of replications of the treatments. The value is numeric and if the data is unbalanced use the harmonic mean of the replications. Inserted all the arguments above, click on the 'Calculate' button", icon = "info")
+                        gmessage(gettext("Enter the value of number of replications of the treatments. The value is numeric and if the data is unbalanced use the harmonic mean of the replications. Inserted all the arguments above, click on the 'Calculate' button", domain = "R-midrangeMCP"), icon = "info")
                       } )
 
 
@@ -475,42 +475,42 @@ guimidrangeMCP <- function(gui = TRUE) {
     ######
 
     # Frames
-    frame.plot <- gframe("Graphic Parameters", container = g1,
+    frame.plot <- gframe(gettext("Graphic Parameters", domain = "R-midrangeMCP"), container = g1,
                          horizontal = FALSE, expand = TRUE)
-    frame.graf <- gframe("Plot", container = g2, expand = TRUE, horizontal = FALSE)
+    frame.graf <- gframe(gettext("Plot", domain = "R-midrangeMCP"), container = g2, expand = TRUE, horizontal = FALSE)
 
     # Groups
     ggraf1 <- ggroup(container = frame.plot, horizontal = TRUE, expand = TRUE)
     ##
-    glabel("Color:", container = ggraf1)
+    glabel(gettext("Color:", domain = "R-midrangeMCP"), container = ggraf1)
     ggraf1d <- gedit("", container = ggraf1,
-                     initial.msg = "or gray.colors() or...", expand = TRUE)
-    bgraf1d <- gbutton("help", container = ggraf1, expand = TRUE,
+                     initial.msg = gettext("or gray.colors() or...", domain = "R-midrangeMCP"), expand = TRUE)
+    bgraf1d <- gbutton(gettext("help", domain = "R-midrangeMCP"), container = ggraf1, expand = TRUE,
                       handler = function(h, ...) {
-                        gmessage("Enter the color name of the chart bars. Place quotation marks around the color names. For example, if you want the color red for the bars, use 'red'. For functions, quotation marks are not necessary, for example gray.colors() function.", icon = "info")
+                        gmessage(gettext("Enter the color name of the chart bars. Place quotation marks around the color names. For example, if you want the color red for the bars, use 'red'. For functions, quotation marks are not necessary, for example gray.colors() function.", domain = "R-midrangeMCP"), icon = "info")
                       } )
     ##
     ggraf2 <- ggroup(container = frame.plot, horizontal = TRUE, expand = TRUE)
     ##
-    glabel("Horizontal:", container = ggraf2)
+    glabel(gettext("Horizontal:", domain = "R-midrangeMCP"), container = ggraf2)
     ggraf2d <- gedit("", container = ggraf2,
-                     initial.msg = "FALSE or TRUE...", expand = TRUE)
-    bgraf2d <- gbutton("help", container = ggraf2, expand = TRUE,
+                     initial.msg = gettext("FALSE or TRUE...", domain = "R-midrangeMCP"), expand = TRUE)
+    bgraf2d <- gbutton(gettext("help", domain = "R-midrangeMCP"), container = ggraf2, expand = TRUE,
                        handler = function(h, ...) {
-                         gmessage("Choose horizontal or vertical bars (FALSE or TRUE).", icon = "info")
+                         gmessage(gettext("Choose horizontal or vertical bars (FALSE or TRUE).", domain = "R-midrangeMCP"), icon = "info")
                        } )
     ###
     ggraf3 <- ggroup(container = frame.plot, horizontal = TRUE, expand = TRUE)
-    glabel("Axes", container = ggraf3)
+    glabel(gettext("Axes", domain = "R-midrangeMCP"), container = ggraf3)
     ggraf3d <- gedit("", container = ggraf3,
                      initial.msg = "xlab = ...; ylab = ...",
                      expand = TRUE)
-    bgraf3d <- gbutton("help", container = ggraf3, expand = TRUE,
+    bgraf3d <- gbutton(gettext("help", domain = "R-midrangeMCP"), container = ggraf3, expand = TRUE,
                        handler = function(h, ...) {
-                         gmessage("Enter the axes. Separate them by semicolons. To add the names on the X and Y axes: xlab = 'Label X-axix'; ylab = 'Label Y-axis'.", icon = "info")
+                         gmessage(gettext("Enter the axes. Separate them by semicolons. To add the names on the X and Y axes: xlab = 'Label X-axix'; ylab = 'Label Y-axis'.", domain = "R-midrangeMCP"), icon = "info")
                        } )
     ##
-    plot_button <- gbutton("Update plot", container = g1, expand = TRUE)
+    plot_button <- gbutton(gettext("Update plot", domain = "R-midrangeMCP"), container = g1, expand = TRUE)
     addHandlerChanged(plot_button, handler = function(h, ...) {
       xlab <- NULL; ylab <- NULL
       hor <- if (is.null(eval(parse(text = svalue(ggraf2d))))) FALSE else eval(parse(text = svalue(ggraf2d)))
@@ -527,10 +527,19 @@ guimidrangeMCP <- function(gui = TRUE) {
 
     # Plot toolbar
     #--------------
-    aCopy <-  gaction(label = "Copy", icon = "copy",  handler = function(...) print("Maria"))
-    aSaveas <- gaction(label = "Save as...", icon = "save-as",  handler = function(h, ...) {
+    aSaveas <- gaction(label = gettext("Save as...", domain = "R-midrangeMCP"), icon = "save-as",  handler = function(h, ...) {
       dev.new()
-      if (svalue(ggraf1d) == "") color <- heat.colors(length(levels(eval(parse(text = svalue(treat))))))
+      if (svalue(entry_radio) == "Model") {
+        objtreat <- dat[,svalue(treat)]
+      }
+      if (svalue(entry_radio) == "Response variable") {
+        objtreat <- dat[,svalue(grv2d)]
+      }
+      if (svalue(entry_radio) == "Averages") {
+        objtreat <- trat
+      }
+
+      if (svalue(ggraf1d) == "") color <- heat.colors(length(levels(objtreat)))
       if (svalue(ggraf1d) != "") color <- eval(parse(text = svalue(ggraf1d)))
       if (svalue(ggraf2d) == "") hor <- FALSE
       if (svalue(ggraf2d) != "") hor <- eval(parse(text = svalue(ggraf2d)))
@@ -570,14 +579,14 @@ guimidrangeMCP <- function(gui = TRUE) {
       svalue(console) <- "pcreatobj <- c('brow', 'dat2', 'dat', 'results');
                           for(i in pcreatobj){if (!any(ls() == i)) pcreatobj <- pcreatobj[-which(pcreatobj == i)]}
                           rm(list = c(pcreatobj,'pcreatobj', 'i'), envir = .GlobalEnv)"
-      !gconfirm("Really close", parent = h$obj)
+      !gconfirm(gettext("Really close", domain = "R-midrangeMCP"), parent = h$obj)
     })
     ##
     # GUI visible
     visible(guimidrangeMCP) <- TRUE
   }
   if (gui == FALSE) {
-    print("Use the MRtest function! For help, use ?MRtest.")
+    print(gettext("Use the MRtest function! For help, use ?MRtest.", domain = "R-midrangeMCP"))
   }
 }
 
