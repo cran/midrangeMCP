@@ -116,7 +116,7 @@
 #'        ismean = TRUE)
 #'
 #' @import "utils" "graphics" "SMR"
-#' @importFrom "stats" "deviance" "df.residual" "qtukey"
+#' @importFrom "stats" "deviance" "df.residual" "qtukey" "aov"
 #' @export
 MRtest <- function(y, trt = NULL, dferror = NULL, mserror = NULL, replication = NULL, alpha = 0.05, main = NULL,
                    MCP = "all", ismean = FALSE){

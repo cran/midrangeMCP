@@ -126,7 +126,7 @@ MRwrite <- function(x, MCP = "all", extension = "csv",
       if (extension == "txt"){
         trt <- rownames(x[[2]][[1]])
         dat <- data.frame(trt, x[[2]][[1]])
-        utils::write.table(dat, name, sep = "\t", row.names = FALSE)
+        utils::write.table(dat, name, sep = "\t", row.names = FALSE, quote = FALSE)
       }
       if (extension == "xlsx"){
         trt <- rownames(x[[2]][[1]])
@@ -156,7 +156,7 @@ MRwrite <- function(x, MCP = "all", extension = "csv",
       if (extension == "txt") {
         trt <- rownames(x[[2]][[cont + 1]])
         dat <- data.frame(trt, x[[2]][[cont + 1]])
-        utils::write.table(dat, name, sep = "\t", row.names = FALSE)
+        utils::write.table(dat, name, sep = "\t", row.names = FALSE , quote = FALSE)
       }
       if (extension == "xlsx") {
         trt <- rownames(x[[2]][[cont + 1]])
@@ -186,7 +186,7 @@ MRwrite <- function(x, MCP = "all", extension = "csv",
       if (extension == "txt"){
         trt <- rownames(x[[2]][[cont + 1]])
         dat <- data.frame(trt, x[[2]][[cont + 1]])
-        utils::write.table(dat, name, sep = "\t", row.names = FALSE)
+        utils::write.table(dat, name, sep = "\t", row.names = FALSE, quote = FALSE)
       }
       if (extension == "xlsx"){
         trt <- rownames(x[[2]][[cont + 1]])
@@ -216,7 +216,7 @@ MRwrite <- function(x, MCP = "all", extension = "csv",
       if (extension == "txt"){
         trt <- rownames(x[[2]][[cont + 1]])
         dat <- data.frame(trt, x[[2]][[cont + 1]])
-        utils::write.table(dat, name, sep = "\t", row.names = FALSE)
+        utils::write.table(dat, name, sep = "\t", row.names = FALSE, quote = FALSE)
       }
       if (extension == "xlsx"){
         trt <- rownames(x[[2]][[cont + 1]])
@@ -246,7 +246,7 @@ MRwrite <- function(x, MCP = "all", extension = "csv",
     if (extension == "txt"){
       trt <- rownames(x[[1]])
       dat <- data.frame(trt, x[[1]])
-      utils::write.table(dat, name, sep = "\t", row.names = FALSE)
+      utils::write.table(dat, name, sep = "\t", row.names = FALSE, quote = FALSE)
     }
     if (extension == "xlsx"){
       trt <- rownames(x[[1]])

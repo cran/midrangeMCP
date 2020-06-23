@@ -16,6 +16,12 @@ msgstr ""
 # GUI
 #####
 
+msgid "browse"
+msgstr "Buscar"
+
+msgid "No data set has been entered!"
+msgstr "Nenhum conjunto de dados foi inserido!"
+
 msgid "GUI to the midrangeMCP package"
 msgstr "IGU para o pacote midrangeMCP"
 
@@ -25,7 +31,7 @@ msgstr "Entre com o conjunto de dados (.txt ou .csv)"
 msgid "Select a file ..."
 msgstr "Selecione um arquivo ..."
 
-msgid "Check that the data has been loaded correctly. To do this, use the 'Edit/View' button or the 'Output' frame."
+msgid "Check the data has been loaded correctly. To do this, use the 'Edit/View' button or the 'Output' frame."
 msgstr "Verifique se os dados foram carregados corretamente. Para isso, use o botão 'Edite/Visualize' ou o quadro 'Saída'."
 
 msgid "Comma as decimal points"
@@ -41,7 +47,7 @@ msgid "Choosing the directory"
 msgstr "Escolha o diretório"
 
 msgid "To insert a data set, the possible extensions are '.txt' and '.csv'. To do this, use the 'browse' button. If you want to identify a directory, before clicking on the 'browse' button, click on the 'Choosing the directory' button. After entering the data set, if you want to edit or view, click on the 'Edit/View' button. If your data has a comma as a decimal point separator, before clicking on the 'browse' button, activate the 'Comma as decimal points' box. Finally, if the variable separator is different from a blank space, indicate it without quotes in the 'Separator of variables' box."
-msgstr "Para inserir um conjunto de dados, as extensões possíveis são '.txt' e '.csv'. Para isso, use o botão 'browse'. Se quiser identificar um diretório, antes de clicar no botão 'browse', clique no botão 'Escolha um diretório'. Depois de entrar com o conjunto de dados, se quiser editar ou visualizar, clique no botão 'Edite/Visualize'. Se seus dados apresentam vírgula como separador decimal, antes de clicar no botão 'browse', ative a caixa 'Vírgula como separador decimal'. Finalmente, se o separador de variáveis é diferente de um espaço em branco, indique-o na caixa 'Separador de variáveis'."
+msgstr "Para inserir um conjunto de dados, as extensões possíveis são '.txt' e '.csv'. Para isso, use o botão 'Buscar'. Se quiser identificar um diretório, antes de clicar no botão 'Buscar', clique no botão 'Escolha um diretório'. Depois de entrar com o conjunto de dados, se quiser editar ou visualizar, clique no botão 'Edite/Visualize'. Se seus dados apresentam vírgula como separador decimal, antes de clicar no botão 'Buscar', ative a caixa 'Vírgula como separador decimal'. Finalmente, se o separador de variáveis é diferente de um espaço em branco, indique-o na caixa 'Separador de variáveis'."
 
 msgid "Output:"
 msgstr "Saída"
@@ -73,8 +79,8 @@ msgstr "Opções de entradas de dados:"
 msgid "help"
 msgstr "Ajuda"
 
-msgid "Choose the type of data entry. If 'Model', enter the experimental model. If 'Response Variable', enter the object name of the responses and treatments variables and if 'Averages', enter the vector of means and treatments. For more details, use the help button on each option."
-msgstr "Escolha um tipo de entrada de dados. Se 'Model', entre com o modelo experimental. Se 'Response Variable', entre com o nome do objeto das variáveis respostas e dos tratamentos. E se 'Averages', entre com o vetor de médias e de tratamentos. Para mais detalhes, use o botão 'Ajuda' em cada opção."
+msgid "Choose the type of data entry. If 'Model', enter the experimental model. If 'Response Variable', enter the object name of the responses and treatments variables and if 'Averages', enter the vector of means and treatments. For more details, use the help button on each option. \n The 'Averages' option is the only one that will not need to load a data set. Just enter the recommended options and then click the Calculate button."
+msgstr "Escolha um tipo de entrada de dados. Se 'Modelo', entre com o modelo experimental. Se 'Variável resposta', entre com o nome do objeto das variáveis respostas e dos tratamentos. E se 'Médias', entre com o vetor de médias e de tratamentos. Para mais detalhes, use o botão 'Ajuda' em cada opção. \n A opção 'Médias' é a única que não será necessário carregar um conjunto de dados. Basta, digitar as opções recomendadas e depois clicar no botão Calcular."
 
 msgid "Significance level:"
 msgstr "Nivel de significância:"
@@ -98,7 +104,7 @@ msgid "Enter label name..."
 msgstr "Entre com o nome do rótulo..."
 
 msgid "Enter the name of the treatments in the experiment model inserted above, in Predictive Variables (PV). The name of the treatment are in the 'Output' frame, after entering the data set. Inserted all the arguments above, click on the 'Calculate' button."
-msgstr "Entre com o nome dos tratamentos no modelo experimental inserido acima, em variáveis preditivas. O nome do tratamento está no quadro 'Saída', depois de inserido o conjunto de dados. Inserido todos os argumentos acim, clique no botão 'Calcular'."
+msgstr "Entre com o nome dos tratamentos do modelo experimental inserido acima, em variáveis preditivas. O nome do tratamento está no quadro 'Saída', depois de inserido o conjunto de dados. Inserido todos os argumentos acim, clique no botão 'Calcular'."
 
 msgid "Response variable"
 msgstr "Variável resposta"
@@ -107,25 +113,25 @@ msgid "Response:"
 msgstr "Resposta:"
 
 msgid "Insert the name of the variable response of the experiment model. The name of the response variable are in the 'Output' frame, after inserting the data set."
-msgstr "Insira o nome da variáve resposta no modelo experimental. O nome da variável resposta está no quadro 'Saída', depois de inserido o conjunto de dados."
+msgstr "Insira o nome da variáve resposta do modelo experimental. O nome da variável resposta está no quadro 'Saída', depois de inserido o conjunto de dados."
 
 msgid "Enter the name of the treatment of the experiment model. The name of the response variable are in the 'Output' frame, after entering the data set."
 msgstr "Entre com o nome do tratamento do modelo experimental. O nome da variável resposta está no quadro 'Saída', depois de inserido o conjunto de dados."
 
 msgid "DFerror:"
-msgstr "GLE"
+msgstr "GLE:"
 
 msgid "Enter numeric value..."
 msgstr "Entre com o valor numérico..."
 
 msgid "Enter the numeric value of the degrees of freedom of the mean square error of the experiment model."
-msgstr "Entre com o valor numérico dos dos graus de liberdade do quadrado médio do erro. "
+msgstr "Entre com o valor numérico dos graus de liberdade do quadrado médio do erro. "
 
 msgid "MSerror:"
-msgstr "QME"
+msgstr "QME:"
 
 msgid "Enter the value of the mean square error of the experiment model. The value is numeric. Inserted all the arguments above, click on the 'Calculate' button."
-msgstr "Entre com o valor do quadrado médio do erro do modelo experimental. O valor é numérico. Inserido todos os argumentos acim, clique no botão 'Calcular'."
+msgstr "Entre com o valor do quadrado médio do erro do modelo experimental. O valor é numérico. Inserido todos os argumentos acima, clique no botão 'Calcular'."
 
 msgid "Averages"
 msgstr "Médias"
@@ -139,7 +145,7 @@ msgstr "Entre com o vetor..."
 msgid "Enter the values of the averages. Each mean of the vector must be separated by a comma. For example, for the vector of the average of four treatments: 10, 20, 30, 40. You do not need to use the concatenate function, i.e., c()."
 msgstr "Entre com os valores das médias. Cada média do vetor de ve ser separado por uma vírgula. Por exemplo, para um vetor de médias de quatro tratamentos: 10, 20, 30, 40. Você não necessita usar a função concatenar do R, isto é, c()."
 
-msgid "Enter the treatment levels. For example, for a character vector of four treatments: A, B, C, D. You do not need to use the concatenate function, i.e., c()."
+msgid "Enter the treatment levels. For example, for a character vector of four treatments: A, B, C, D. You do not need to use the concatenate function, i.e., c(). Nor will you need to use quotes between treatment levels."
 msgstr "Entre com os niveis dos tratamentos. Por exemplo, para um vetor de caractere de quatro tratamentos: A, B, C, D. Você não necessita usar a função concatenar, isto é, c(). Nor will you need to use quotes between treatment levels."
 
 msgid "Enter the numeric value..."
@@ -196,8 +202,17 @@ msgstr "Salvar como..."
 msgid "Really close"
 msgstr "Deseja fechar?"
 
-msgid "Use the MRtest function! For help, use ?MRtest."
-msgstr "Use a função MRtest! Para ajuda, use ?MRtest."
+msgid "Really close?"
+msgstr "Deseja fechar?"
+
+msgid "Use the MRtest function! For help, use ?MRtest"
+msgstr "Use a função MRtest! Para ajuda, use ?MRtest"
+
+msgid "Tell me something:"
+msgstr "Diga-me uma coisa:"
+
+msgid "Do you want to use the GUI for the package?"
+msgstr "Você quer usar a IGU para o pacote?"
 
 ################################
 # Internal functions without GUI
