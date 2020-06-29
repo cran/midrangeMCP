@@ -524,12 +524,43 @@ guimidrangeMCP <- function(gui = TRUE) {
         }
         # Button save as...
         #graphics.off() # Erasing All Graphics Devices
+        dispplot <- NULL
         bsaveas <- tkbutton(parent = framelabelaux, text = gettext("Save as...", domain = "R-midrangeMCP"),
                             borderwidth = 0, underline = 0,
                             image = tclvalue(imagesaveas), compound = "top",
                             command = function(...){
-                              grDevices::dev.new() # New device plot
-                              midrangeMCP::MRbarplot(results)
+                              dispplot <<- grDevices::dev.new(noRStudioGD = TRUE) # New device plot
+                              #grDevices::dev.new(noRStudioGD = TRUE) # New device plot
+                              if (tclvalue(vari3) == gettext("Model", domain = "R-midrangeMCP")) {
+                                objtreat <- dat[,tclvalue(vari6)]
+                              }
+                              if (tclvalue(vari3) == gettext("Response variable", domain = "R-midrangeMCP")) {
+                                objtreat <- dat[,tclvalue(vari8)]
+                              }
+                              if (tclvalue(vari3) == gettext("Averages", domain = "R-midrangeMCP")) {
+                                # Treatment levels
+                                trat <- strsplit(tclvalue(vari12), split = ",", perl = TRUE)[[1]]
+                                trat <- as.factor(trat)
+                                objtreat <- trat
+                              }
+                              xlab <- NULL; ylab <- NULL
+                              eval(parse(text = tclvalue(vari18)))
+                              hor <- if (tclvalue(vari17) == "") FALSE else eval(parse(text = tclvalue(vari17)))
+                              if (tclvalue(vari16) == "") {
+                                color <- heat.colors(length(levels(objtreat)))
+                              } else {
+                                if (any(c(grep("\'", tclvalue(vari16)), grep("\"", tclvalue(vari16))) == 1)) {
+                                  if (length(grep("\'", tclvalue(vari16))) > 0) {
+                                    color <- gsub("\'", "", tclvalue(vari16))
+                                  }
+                                  if (length(grep("\"", tclvalue(vari16))) > 0) {
+                                    color <- gsub("\"", "", tclvalue(vari16))
+                                  }
+                                } else{
+                                  color <- eval(parse(text = tclvalue(vari16)))
+                                }
+                              }
+                              midrangeMCP::MRbarplot(results, col = color, horiz = hor, xlab = xlab, ylab = ylab)
                             })
         tkpack(bsaveas, side = "left")
 
@@ -538,7 +569,7 @@ guimidrangeMCP <- function(gui = TRUE) {
                                          padding = c(3,3,3,3)),
                side = "top", fill = "x", expand = TRUE)
         #Label
-        scalelabel <- tklabel(parent = framelabelaux2, text = "Scale of Plot")
+        scalelabel <- tklabel(parent = framelabelaux2, text = gettext("Scale of Plot", domain = "R-midrangeMCP"))
         # Scale of plot
         s <- tkscale(framelabelaux2, command = f, from = 1, to = 3.00, variable = "fator",
                      showvalue = TRUE, resolution = 0.05, orient = "horiz",
@@ -616,12 +647,43 @@ guimidrangeMCP <- function(gui = TRUE) {
         }
         # Button save as...
         #graphics.off() # Erasing All Graphics Devices
+        dispplot <- NULL
         bsaveas <- tkbutton(parent = framelabelaux, text = gettext("Save as...", domain = "R-midrangeMCP"),
                             borderwidth = 0, underline = 0,
                             image = tclvalue(imagesaveas), compound = "top",
                             command = function(...){
-                              grDevices::dev.new() # New device plot
-                              midrangeMCP::MRbarplot(results)
+                              dispplot <<- grDevices::dev.new(noRStudioGD = TRUE) # New device plot
+                              #grDevices::dev.new(noRStudioGD = TRUE) # New device plot
+                              if (tclvalue(vari3) == gettext("Model", domain = "R-midrangeMCP")) {
+                                objtreat <- dat[,tclvalue(vari6)]
+                              }
+                              if (tclvalue(vari3) == gettext("Response variable", domain = "R-midrangeMCP")) {
+                                objtreat <- dat[,tclvalue(vari8)]
+                              }
+                              if (tclvalue(vari3) == gettext("Averages", domain = "R-midrangeMCP")) {
+                                # Treatment levels
+                                trat <- strsplit(tclvalue(vari12), split = ",", perl = TRUE)[[1]]
+                                trat <- as.factor(trat)
+                                objtreat <- trat
+                              }
+                              xlab <- NULL; ylab <- NULL
+                              eval(parse(text = tclvalue(vari18)))
+                              hor <- if (tclvalue(vari17) == "") FALSE else eval(parse(text = tclvalue(vari17)))
+                              if (tclvalue(vari16) == "") {
+                                color <- heat.colors(length(levels(objtreat)))
+                              } else {
+                                if (any(c(grep("\'", tclvalue(vari16)), grep("\"", tclvalue(vari16))) == 1)) {
+                                  if (length(grep("\'", tclvalue(vari16))) > 0) {
+                                    color <- gsub("\'", "", tclvalue(vari16))
+                                  }
+                                  if (length(grep("\"", tclvalue(vari16))) > 0) {
+                                    color <- gsub("\"", "", tclvalue(vari16))
+                                  }
+                                } else{
+                                  color <- eval(parse(text = tclvalue(vari16)))
+                                }
+                              }
+                              midrangeMCP::MRbarplot(results, col = color, horiz = hor, xlab = xlab, ylab = ylab)
                             })
         tkpack(bsaveas, side = "left")
 
@@ -630,7 +692,7 @@ guimidrangeMCP <- function(gui = TRUE) {
                                           padding = c(3,3,3,3)),
                side = "top", fill = "x", expand = TRUE)
         #Label
-        scalelabel <- tklabel(parent = framelabelaux2, text = "Scale of Plot")
+        scalelabel <- tklabel(parent = framelabelaux2, text = gettext("Scale of Plot", domain = "R-midrangeMCP"))
         # Scale of plot
         s <- tkscale(framelabelaux2, command = f, from = 1, to = 3.00, variable = "fator",
                      showvalue = TRUE, resolution = 0.05, orient = "horiz",
@@ -715,12 +777,43 @@ guimidrangeMCP <- function(gui = TRUE) {
         }
         # Button save as...
         #graphics.off() # Erasing All Graphics Devices
+        dispplot <- NULL
         bsaveas <- tkbutton(parent = framelabelaux, text = gettext("Save as...", domain = "R-midrangeMCP"),
                             borderwidth = 0, underline = 0,
                             image = tclvalue(imagesaveas), compound = "top",
                             command = function(...){
-                              grDevices::dev.new() # New device plot
-                              midrangeMCP::MRbarplot(results)
+                              dispplot <<- grDevices::dev.new(noRStudioGD = TRUE) # New device plot
+                              #grDevices::dev.new(noRStudioGD = TRUE) # New device plot
+                              if (tclvalue(vari3) == gettext("Model", domain = "R-midrangeMCP")) {
+                                objtreat <- dat[,tclvalue(vari6)]
+                              }
+                              if (tclvalue(vari3) == gettext("Response variable", domain = "R-midrangeMCP")) {
+                                objtreat <- dat[,tclvalue(vari8)]
+                              }
+                              if (tclvalue(vari3) == gettext("Averages", domain = "R-midrangeMCP")) {
+                                # Treatment levels
+                                trat <- strsplit(tclvalue(vari12), split = ",", perl = TRUE)[[1]]
+                                trat <- as.factor(trat)
+                                objtreat <- trat
+                              }
+                              xlab <- NULL; ylab <- NULL
+                              eval(parse(text = tclvalue(vari18)))
+                              hor <- if (tclvalue(vari17) == "") FALSE else eval(parse(text = tclvalue(vari17)))
+                              if (tclvalue(vari16) == "") {
+                                color <- heat.colors(length(levels(objtreat)))
+                              } else {
+                                if (any(c(grep("\'", tclvalue(vari16)), grep("\"", tclvalue(vari16))) == 1)) {
+                                  if (length(grep("\'", tclvalue(vari16))) > 0) {
+                                    color <- gsub("\'", "", tclvalue(vari16))
+                                  }
+                                  if (length(grep("\"", tclvalue(vari16))) > 0) {
+                                    color <- gsub("\"", "", tclvalue(vari16))
+                                  }
+                                } else{
+                                  color <- eval(parse(text = tclvalue(vari16)))
+                                }
+                              }
+                              midrangeMCP::MRbarplot(results, col = color, horiz = hor, xlab = xlab, ylab = ylab)
                             })
         tkpack(bsaveas, side = "left")
 
@@ -729,7 +822,7 @@ guimidrangeMCP <- function(gui = TRUE) {
                                           padding = c(3,3,3,3)),
                side = "top", fill = "x", expand = TRUE)
         #Label
-        scalelabel <- tklabel(parent = framelabelaux2, text = "Scale of Plot")
+        scalelabel <- tklabel(parent = framelabelaux2, text = gettext("Scale of Plot", domain = "R-midrangeMCP"))
         # Scale of plot
         s <- tkscale(framelabelaux2, command = f, from = 1, to = 3.00, variable = "fator",
                      showvalue = TRUE, resolution = 0.05, orient = "horiz",
@@ -1286,6 +1379,8 @@ guimidrangeMCP <- function(gui = TRUE) {
                                         objtreat <- dat[,tclvalue(vari8)]
                                       }
                                       if (tclvalue(vari3) == gettext("Averages", domain = "R-midrangeMCP")) {
+                                        trat <- strsplit(tclvalue(vari12), split = ",", perl = TRUE)[[1]]
+                                        trat <- as.factor(trat)
                                         objtreat <- trat
                                       }
                                       xlab <- NULL; ylab <- NULL
@@ -1340,12 +1435,44 @@ guimidrangeMCP <- function(gui = TRUE) {
                                       }
                                       # Button save as...
                                       #graphics.off() # Erasing All Graphics Devices
+                                      dispplot <- NULL
                                       bsaveas <- tkbutton(parent = framelabelaux, text = gettext("Save as...", domain = "R-midrangeMCP"),
                                                           borderwidth = 0, underline = 0,
                                                           image = tclvalue(imagesaveas), compound = "top",
                                                           command = function(...){
-                                                            grDevices::dev.new() # New device plot
-                                                            midrangeMCP::MRbarplot(results)
+                                                            dispplot <<- grDevices::dev.new(noRStudioGD = TRUE) # New device plot
+                                                            #grDevices::dev.new(noRStudioGD = TRUE) # New device plot
+                                                            if (tclvalue(vari3) == gettext("Model", domain = "R-midrangeMCP")) {
+                                                              objtreat <- dat[,tclvalue(vari6)]
+                                                            }
+                                                            if (tclvalue(vari3) == gettext("Response variable", domain = "R-midrangeMCP")) {
+                                                              objtreat <- dat[,tclvalue(vari8)]
+                                                            }
+
+                                                            if (tclvalue(vari3) == gettext("Averages", domain = "R-midrangeMCP")) {
+                                                              # Treatment levels
+                                                              trat <- strsplit(tclvalue(vari12), split = ",", perl = TRUE)[[1]]
+                                                              trat <- as.factor(trat)
+                                                              objtreat <- trat
+                                                            }
+                                                            xlab <- NULL; ylab <- NULL
+                                                            eval(parse(text = tclvalue(vari18)))
+                                                            hor <- if (tclvalue(vari17) == "") FALSE else eval(parse(text = tclvalue(vari17)))
+                                                            if (tclvalue(vari16) == "") {
+                                                              color <- heat.colors(length(levels(objtreat)))
+                                                              } else {
+                                                              if (any(c(grep("\'", tclvalue(vari16)), grep("\"", tclvalue(vari16))) == 1)) {
+                                                                if (length(grep("\'", tclvalue(vari16))) > 0) {
+                                                                  color <- gsub("\'", "", tclvalue(vari16))
+                                                                }
+                                                                if (length(grep("\"", tclvalue(vari16))) > 0) {
+                                                                  color <- gsub("\"", "", tclvalue(vari16))
+                                                                }
+                                                              } else{
+                                                                color <- eval(parse(text = tclvalue(vari16)))
+                                                              }
+                                                            }
+                                                            midrangeMCP::MRbarplot(results, col = color, horiz = hor, xlab = xlab, ylab = ylab)
                                                           })
                                       tkpack(bsaveas, side = "left")
 
@@ -1354,7 +1481,7 @@ guimidrangeMCP <- function(gui = TRUE) {
                                                                         padding = c(3,3,3,3)),
                                              side = "top", fill = "x", expand = TRUE)
                                       #Label
-                                      scalelabel <- tklabel(parent = framelabelaux2, text = "Scale of Plot")
+                                      scalelabel <- tklabel(parent = framelabelaux2, text = gettext("Scale of Plot", domain = "R-midrangeMCP"))
                                       # Scale of plot
                                       s <- tkscale(framelabelaux2, command = f, from = 1, to = 3.00, variable = "fator",
                                                    showvalue = TRUE, resolution = 0.05, orient = "horiz",

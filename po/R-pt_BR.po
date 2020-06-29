@@ -146,7 +146,7 @@ msgid "Enter the values of the averages. Each mean of the vector must be separat
 msgstr "Entre com os valores das médias. Cada média do vetor de ve ser separado por uma vírgula. Por exemplo, para um vetor de médias de quatro tratamentos: 10, 20, 30, 40. Você não necessita usar a função concatenar do R, isto é, c()."
 
 msgid "Enter the treatment levels. For example, for a character vector of four treatments: A, B, C, D. You do not need to use the concatenate function, i.e., c(). Nor will you need to use quotes between treatment levels."
-msgstr "Entre com os niveis dos tratamentos. Por exemplo, para um vetor de caractere de quatro tratamentos: A, B, C, D. Você não necessita usar a função concatenar, isto é, c(). Nor will you need to use quotes between treatment levels."
+msgstr "Entre com os niveis dos tratamentos. Por exemplo, para um vetor de caractere de quatro tratamentos: A, B, C, D. Você não necessita usar a função concatenar, isto é, c(). Não será necessário colocar aspas entre os níveis dos tratamentos."
 
 msgid "Enter the numeric value..."
 msgstr "Entre com o valor numérico..."
@@ -198,6 +198,10 @@ msgstr "Atualizar o gráfico"
 
 msgid "Save as..."
 msgstr "Salvar como..."
+
+msgid "Scale of Plot"
+msgstr "Escala do gráfico"
+
 
 msgid "Really close"
 msgstr "Deseja fechar?"
