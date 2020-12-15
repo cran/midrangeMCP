@@ -199,7 +199,7 @@ MRwrite <- function(x, MCP = "all", extension = "csv",
         ntrt <- length(trt)
         dat  <- data.frame(trt, x[[2]][[cont + 1]])
         rownames(dat) <- 1:ntrt
-        cat("\n\nTable in latex of results of the MGM test\n\n")
+        cat("\n\nTable in latex of results of the SNKM test\n\n")
         print(xtable::xtable(dat), include.rownames=FALSE)
       }
     }

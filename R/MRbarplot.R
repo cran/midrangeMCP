@@ -2,8 +2,8 @@
 #'
 #' \code{MRbarplot} creates a bar plot with vertical or horizontal bars
 #'     to compare the mean treatments by the tests:
-#'     Skott-Knott midrange, Skott-Knott range, Student-Newman-Keuls
-#'      and Tukey midrange.
+#'     means grouping based on midrange, means grouping based on range,
+#'     Student-Newman-Keuls and Tukey  based on midrange.
 #' @param x An object of the \code{MRtest} function
 #' @param MCP Allows choosing the multiple comparison test.
 #'     The \emph{defaut} is "all". This option will perform all tests

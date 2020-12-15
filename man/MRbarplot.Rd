@@ -30,8 +30,8 @@ the bars are drawn horizontally with the first at the bottom.}
 \description{
 \code{MRbarplot} creates a bar plot with vertical or horizontal bars
     to compare the mean treatments by the tests:
-    Skott-Knott midrange, Skott-Knott range, Student-Newman-Keuls
-     and Tukey midrange.
+    means grouping based on midrange, means grouping based on range,
+    Student-Newman-Keuls and Tukey  based on midrange.
 }
 \details{
 The \code{MCP} argument allows choosing several tests

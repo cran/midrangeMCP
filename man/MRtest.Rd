@@ -38,9 +38,9 @@ This argument should be informed only if \code{ismean = TRUE}.}
 
 \item{MCP}{Allows choosing the multiple comparison test;
 the \emph{defaut} is "all". This option will go perform all tests.
-However, the options are: the Skott-Knott midrange test ("MGM"),
-the Skott-Knott Range test ("MGR"), the Student-Newman-Keuls
-midrange test ("SNKM") and the Tukey midrange test ("TM").}
+However, the options are: the Means grouping based on midrange test ("MGM"),
+Means Grouping based on Range test ("MGR"), the Student-Newman-Keuls
+based on midrange test ("SNKM") and the Tukey based on midrange test ("TM").}
 
 \item{ismean}{Logic. If \code{FALSE} (default), the \code{y} argument represents
 a model (aov or lm) or a numeric vector containing the response variable. If \code{TRUE} the \code{y} argument represents the
@@ -55,10 +55,11 @@ mean of treatments.}
     also stored in the object.
 }
 \description{
-\code{MRtest} applies the Skott-Knott midrange, Skott-Knott range,
-    Student-Newman-Keuls midrange and Tukey midrange tests. These are new
-    tests for multiple comparisons proposed by the authors (2015), that are in publication
-    fase.
+\code{MRtest} applies the Means grouping based on midrange, Means Grouping
+    based on Range, Student-Newman-Keuls based on midrange and
+    Tukey based on midrange tests.
+    These are new tests for multiple comparisons proposed by the
+    authors (BATISTA, 2016), that are being published.
 }
 \details{
 The \code{MCP} argument allows you to choose various tests
