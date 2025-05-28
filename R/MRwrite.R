@@ -59,6 +59,9 @@ MRwrite <- function(x, MCP = "all", extension = "csv",
     MCP = tests
   }
 
+  # Verify the tests selected
+  nas  <- pmatch(MCP, mcps)
+
   # For option dataMR = "all"
   if (dataMR == "all"){
     dataMR <- c("groups", "summary")
@@ -74,12 +77,19 @@ MRwrite <- function(x, MCP = "all", extension = "csv",
   }
   #################################################
 
+  #Initial groups:
+  test.MGM  <- NA
+  test.MGR  <- NA
+  test.SNKM <- NA
+  test.TM   <- NA
+
+
 
   #################################################
   # Defensive programming: any invalid MCP
   namcp <- pmatch(MCP, tests)
   if (any(is.na(namcp))){
-    if(length(tests) ==1){
+    if (length(tests) == 1) {
       stop("The choice of the tests in the MCP argument must be in accordance with the tests chosen in the x argument \n Options: ",
            tests, call. = FALSE)
     } else{
@@ -115,10 +125,10 @@ MRwrite <- function(x, MCP = "all", extension = "csv",
 
   # Write the results for option dataMR = "groups"
   if (any(dataMR == "groups")) {
-    if(any(MCP == "MGM")) {
+    if (any(MCP == "MGM")) {
       name <- "groupMGM"
       name <- paste(name, extension, sep = ".")
-      if(extension == "csv"){
+      if (extension == "csv") {
         trt <- rownames(x[[2]][[1]])
         dat <- data.frame(trt, x[[2]][[1]])
         utils::write.table(dat, name, sep = ";", row.names = FALSE)
@@ -140,7 +150,8 @@ MRwrite <- function(x, MCP = "all", extension = "csv",
         dat  <- data.frame(trt, x[[2]][[1]])
         rownames(dat) <- 1:ntrt
         cat("Table in latex of results of the MGM test\n\n")
-        print(xtable::xtable(dat), include.rownames=FALSE)
+        test.MGM <- xtable::xtable(dat)
+        print(test.MGM, include.rownames = FALSE)
       }
     }
     if (any(MCP == "MGR")) {
@@ -170,7 +181,8 @@ MRwrite <- function(x, MCP = "all", extension = "csv",
         dat  <- data.frame(trt, x[[2]][[cont + 1]])
         rownames(dat) <- 1:ntrt
         cat("\n\nTable in latex of results of the MGR test\n\n")
-        print(xtable::xtable(dat), include.rownames=FALSE)
+        test.MGR <- xtable::xtable(dat)
+        print(test.MGR, include.rownames = FALSE)
       }
     }
     if (any(MCP == "SNKM")) {
@@ -200,7 +212,8 @@ MRwrite <- function(x, MCP = "all", extension = "csv",
         dat  <- data.frame(trt, x[[2]][[cont + 1]])
         rownames(dat) <- 1:ntrt
         cat("\n\nTable in latex of results of the SNKM test\n\n")
-        print(xtable::xtable(dat), include.rownames=FALSE)
+        test.SNKM <- xtable::xtable(dat)
+        print(test.SNKM, include.rownames = FALSE)
       }
     }
     if (any(MCP == "TM")){
@@ -230,12 +243,13 @@ MRwrite <- function(x, MCP = "all", extension = "csv",
         dat  <- data.frame(trt, x[[2]][[cont + 1]])
         rownames(dat) <- 1:ntrt
         cat("\n\nTable in latex of results of the TM test\n\n")
-        print(xtable::xtable(dat), include.rownames=FALSE)
+        test.TM <- xtable::xtable(dat)
+        print(test.TM, include.rownames = FALSE)
       }
     }
   }
   # Write the results for option dataMR = "summary"
-  if (any(dataMR == "summary")){
+  if (any(dataMR == "summary")) {
     name <- "Summary"
     name <- paste(name, extension, sep = ".")
     if(extension == "csv"){
@@ -259,14 +273,48 @@ MRwrite <- function(x, MCP = "all", extension = "csv",
       ntrt <- length(trt)
       dat  <- data.frame(trt, x[[1]])
       rownames(dat) <- 1:ntrt
-      cat("\n\nTable in latex of results of descriptive statistics\n\n")
-      print(xtable::xtable(dat), include.rownames=FALSE)
+      # cat("\n\nTable in latex of results of descriptive statistics\n\n")
+      # print(xtable::xtable(dat), include.rownames = FALSE)
+      statdesc <- xtable::xtable(dat)
     }
   }
   if (extension == "latex"){
-    cat("\nSee yours tables in Console\n", "Format:", extension)
+    cat("\nSee yours tables in Console\n", "Format:", extension, "\n")
   }
   if (extension != "latex"){
-    cat("See your files in Directory\n", "Format:", extension)
+    cat("See your files in Directory: ", getwd(), "\n", "Format:", extension, "\n")
   }
+
+  #All groups
+  group.tests <- list(group.MGM  = test.MGM,
+                      group.MGR  = test.MGR,
+                      group.SNKM = test.SNKM,
+                      group.TM   = test.TM)
+  ################
+  # Output results
+  ################
+
+  alltest    <- 1:4
+  nas        <- nas[order(nas, na.last = NA)]
+  ntest      <- alltest[-nas]
+
+  if (length(nas) == 4) {
+    grouptest  <- group.tests
+  } else {
+    grouptest  <- group.tests[-ntest]
+  }
+  if (extension != "latex") {
+    output <- gettext("See your files in Directory", domain = "R-MCPtests")
+  } else {
+    output <- list(
+      "Result of tests" = grouptest,
+      "Descriptive Statistics" = statdesc
+    )
+  }
+
+  return(output)
+
+
 }
+
+

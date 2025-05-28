@@ -1,5 +1,16 @@
-Version 3.1.1
+Version 3.1.3
+----------------------
+- GUI without the dependency on the tkrplot package
+- Corrections to the package title
 
+Version 3.1.2
+----------------------
+- Invisible object inserted in MRwrite function
+- Corrections in the GUI
+- Created own function for plotting and resizing graphs in tcl/tk language
+
+Version 3.1.1
+----------------------
 - Bug partially fixed on the tkrplot package. We changed this package from the Imports field to Suggests in DESCRIPTION. But, this needs to be improved.
 
 
